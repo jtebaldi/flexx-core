@@ -9,7 +9,8 @@ module CamaleonCms::SessionHelper
 
     user.update({last_login_at: Time.zone.now})
     cookies[:auth_token] = c
-
+    Rails.logger.info "@@@@@@@@@@@@@@@@@: #{cookies.inspect}"
+    puts "@@@@@@@@@@@@@@@@@: #{cookies.inspect}"
     # user redirection
     flash[:notice] = t('camaleon_cms.admin.login.message.success', locale: current_site.get_admin_language)
     if redirect_url.present?
@@ -105,6 +106,9 @@ module CamaleonCms::SessionHelper
 
   # return current user logged in
   def cama_current_user
+    Rails.logger.info "@@@@@@@@@@@@@@@@@: #{cookies.inspect}"
+    puts "@@@@@@@@@@@@@@@@@: #{cookies.inspect}"
+
     return @cama_current_user if defined?(@cama_current_user)
     # api current user...
     @cama_current_user = cama_calc_api_current_user
@@ -115,6 +119,8 @@ module CamaleonCms::SessionHelper
     return nil unless c.size == 3
 
     if c[1] == request.user_agent && request.ip == c[2]
+      Rails.logger.info "@@@@@@@@@@@@@@@@@: searching userrrrrr #{c[0]}"
+      puts "@@@@@@@@@@@@@@@@@: searching userrrrrr #{c[0]}"
       @cama_current_user = (current_site.users_include_admins.find_by_auth_token(c[0]).decorate rescue nil)
     end
   end
