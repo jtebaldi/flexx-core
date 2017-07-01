@@ -1,0 +1,48 @@
+$content-bg: #f2f4f8;
+$content-panel-bg: #eceff6;
+$global-border-radius: 4px;
+$border-color: rgba(0,0,0,0.1);
+$element-box-shadow: 0px 0px 30px rgba(69, 101, 173, 0.1);
+
+// Fonts
+
+$os-font-family-main: "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$os-family-headings:  "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+$font-family-alt:     "Proxima Nova W01", "Rubik", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !default;
+
+$font-weight-light: 300;
+$os-font-weight-normal: 400;
+$os-font-weight-bold: 500;
+$os-headings-font-weight: 500;
+
+$font-alt-weight-light: $font-weight-light;
+$font-alt-weight-normal: $os-font-weight-normal;
+$font-alt-weight-bold: $os-font-weight-bold;
+
+$global-letter-spacing: 1px;
+
+$menu-dark-icons-color: #9db2ff;
+$menu-light-icons-color: #308af4;
+$menu-light-icons-color: #0073ff;
+$sub-menu-dark-bg-color: #0061da;
+$menu-top-light-bg: #fff;
+$menu-top-dark-bg: #242B3F;
+
+$menu-side-width: 300px;
+$menu-side-compact-width: 90px;
+
+// Colors
+$dark-red: #9d1818;
+$highlight-accent: #FBB463;
+
+$body-color-light: #868686;
+
+// Extra custom Bootstrap Variables
+
+// Navs
+$nav-pills-link-padding-small: .2em 1.1em !default;
+$nav-tabs-link-padding-small: .7em 1.1em !default;
+
+
+// Tables
+$table-lg-cell-padding:         1.2rem 1.5rem !default;
