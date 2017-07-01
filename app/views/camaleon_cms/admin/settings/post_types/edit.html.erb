@@ -1,9 +1,9 @@
 <div class="page-content-wrap">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <div class="panel panel-default">
-        <div class="panel-heading ui-draggable-handle">
-          <h4><%= @post_type.id.present? ? t('camaleon_cms.admin.post_type.edit_post_type') : t('camaleon_cms.admin.post_type.add_post_type') %> </h4>
+      <div class="box">
+        <div class="box-header with-border ui-draggable-handle">
+          <h3 class="box-title"><%= @post_type.id.present? ? t('camaleon_cms.admin.post_type.edit_post_type') : t('camaleon_cms.admin.post_type.add_post_type') %> </h3>
         </div>
           <%= render partial: 'form' %>
       </div>

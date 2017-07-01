@@ -290,3 +290,226 @@ label.error, span.error{
   color: #a94442;
   font-size: 11px;
 }
+
+// ------------------ Added most recently -----------------------------------
+// Deactivate any anchor
+.not-active {
+  pointer-events: none;
+  cursor: default;
+}
+
+// Breadcrumb
+ol.breadcrumb {
+  background-color: transparent;
+  padding: 0 15px;
+  text-align: right;
+  font-size: 12px;
+  margin-bottom: 15px;
+  color: #777;
+  
+  a {
+    color: black;
+  }
+  
+  & li + li:before {
+    content: ">";
+  }
+}
+
+// Custom responsive tables
+.custom-tabe-responsive {
+  table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+  table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+  }
+  table tr {
+    background: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+  }
+  table th,
+  table td {
+    padding: .625em;
+    text-align: center;
+  }
+  table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  @media screen and (max-width: 600px) {
+    table {
+      border: 0;
+    }
+    table caption {
+      font-size: 1.3em;
+    }
+    table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    table td:before {
+      /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    table td:last-child {
+      border-bottom: 0;
+    }
+  }
+}
+
+// Box tools
+.box-tools a {
+  color: #444;}
+  
+.btn-box-action {
+  background-color: transparent;
+  font-size: 15px;
+  
+  i {
+    font-size: 13px;}
+}
+
+// User menu dropdown overrides
+.navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
+  right: 0;
+}
+
+// Sidebar link spacing
+.sidebar-menu > li > a {
+  padding: 18px 8px 18px 15px;
+}
+
+.sidebar-menu .treeview-menu > li > a {
+  padding: 8px 8px 8px 16px;
+}
+
+#main-header {
+  border-bottom: 1px solid #d2d6de;
+  
+  & .logo {
+    border-right: none;
+    
+    & img {
+      max-height: 90%;
+    }
+  }
+  
+  & .navbar > .sidebar-toggle {
+    border-left: 1px solid #d2d6de;
+    border-right: none;
+  }
+}
+
+// Desktop view
+@media (min-width: 768px) {
+  .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span {
+    padding: 18px 5px 18px 20px;
+    border-right: 1px solid #eee;
+    border-top: 1px solid #eee;
+  }
+  .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
+    top: 56px;
+    border-right: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+  }
+}
+
+
+// Mobile view 
+@media (max-width: 767px) {
+  // Login screen
+  .login-box,
+  .register-box {
+    width: auto;
+  }
+  
+  // Hide breadcrumb on mobile
+  ol.breadcrumb {
+    display: none;
+  }
+  
+  // Override bg color behind logo
+  .skin-black-light .main-header > .logo {
+    background-color: #ccc !important;  
+  }
+  
+  // Make sidebar full screen width
+  .sidebar-open #sidebar-menu { 
+    width: 100% !important;
+  }
+  .sidebar-open .content-wrapper,
+  .sidebar-open .right-side,
+  .sidebar-open .main-footer {
+    -webkit-transform: translate(100%);
+    -ms-transform: translate(100%);
+    -o-transform: translate(100%);
+    transform: translate(100%);
+  }
+  
+  // Enlarge sidebar menu links and sub-links
+  .sidebar-menu > li > a {
+    padding: 20px;
+    display: block;
+    text-align: center;
+  }
+  .sidebar-menu .treeview-menu > li > a {
+    padding: 20px;
+    text-align: center;
+  }
+  .treeview-menu {
+    padding-left: 0 !important;
+    
+    & > .xn-openable > .treeview-menu {
+      background-color: #fff;
+      
+      & > li > a {
+        border-bottom: 1px solid #eee;
+        &:hover { color: #000; }
+      }
+    }
+  }
+  
+  // User menu dropdown
+  .navbar-nav > .user-menu > .dropdown-menu {
+    width: 100%;
+  }
+}
+
+// -------------- MEDIA
+#cama_media_gallery .media_browser_list {
+  background-color: transparent !important;
+  border-right: none !important;
+  padding: 0 15px !important;
+}
