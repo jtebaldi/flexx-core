@@ -6,19 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <%= raw the_head({}) if current_site.present? %>
     <title><%= (content_for?(:title) ? yield(:title) : t('camaleon_cms.admin.login.login')) %></title>
-    <%= stylesheet_link_tag "camaleon_cms/admin/admin-basic-manifest", media: "all" %>
-    <%= javascript_include_tag "camaleon_cms/admin/admin-basic-manifest" %>
+    <%= stylesheet_link_tag "rynger_cms/admin/admin-manifest", media: "all" %>
+    <%= javascript_include_tag "rynger_cms/admin/admin-manifest" %>
 </head>
-<body class="hold-transition login-page">
-    <div class="row">
-        <div class="col-sm-6 col-sm-offset-3 login-box">
-            <div class="login-logo">
-                <%= link_to(image_tag(current_site.the_logo), cama_admin_login_path) rescue image_tag("camaleon_cms/camaleon.png") %>
-            </div>
-            <div class="login-box-body">
-                <%= yield %>
-            </div>
-        </div>
+<body class="auth-wrapper">
+  <div class="all-wrapper menu-side with-pattern">
+    <div class="auth-box-w">
+      <div class="logo-w">
+        <%= link_to(image_tag(current_site.the_logo), cama_admin_login_path) rescue image_tag("rynger_cms/app-logo.png") %>
+      </div>
+      <h4 class="auth-header">
+        Login
+      </h4>
+      <%= yield %>
     </div>
+  </div>
 </body>
 </html>

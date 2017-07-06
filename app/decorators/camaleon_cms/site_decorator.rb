@@ -8,11 +8,11 @@ class CamaleonCms::SiteDecorator < CamaleonCms::TermTaxonomyDecorator
   # return logo url for this site
   # default: this url will be returned if logo is not present.
   def the_logo(default = nil)
-    object.get_option("logo") || (default || "#{h.asset_url("camaleon_cms/camaleon.png")}")
+    object.get_option("logo") || (default || "#{h.asset_url("rynger_cms/app-logo.png")}")
   end
 
   def the_icon
-    object.get_option("icon") || h.asset_url('camaleon_cms/favicon.ico')
+    object.get_option("icon") || h.asset_url('rynger_cms/favicon.ico')
   end
 
   # return all contents from this site registered for post_type = slug (filter visibility, hidden, expired, ...)
