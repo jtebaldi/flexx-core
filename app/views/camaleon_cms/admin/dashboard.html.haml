@@ -1,0 +1,11 @@
+.content-i  
+  .content-box
+    .element-wrapper
+      %h4.element-header Dashboard
+      .element-box{:style => "min-height: 350px"}
+        - r = {content: ""}; hooks_run("on_notification", r);
+        #dashboard_notifications
+          = raw r[:content]
+        - r = {content: ""}; hooks_run("on_dashboard", r);
+        #dashboard_items
+          = raw r[:content]

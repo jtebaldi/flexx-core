@@ -34,8 +34,6 @@ function not_display_type(display_type){
 
 $(function(){
 
-
-
   // #1. CHAT APP
 
   $('.floated-chat-btn, .floated-chat-w .chat-close').on('click', function(){
@@ -616,5 +614,7 @@ $(function(){
 
   // - Activate tooltips
   $('[data-toggle="tooltip"]').tooltip();
+  
+  $(".alert").alert();
 
 });

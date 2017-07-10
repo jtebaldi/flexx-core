@@ -1,10 +1,5 @@
 // ---------------------------------------- Added
 
-// Push header actions to the right (like "add post")
-.element-header > .header-actions {
-  float: right;
-}
-
 // Custom responsive tables
 
 $bp-maggie: 15em; 
@@ -198,11 +193,25 @@ $bp-homer: 75em;
   line-height: 1.9;
 }
 
-// ---------------------------------------- Overrides for Light
+// ---------------------------------------- Overrides/modifications for Light
 
 // Remove padding from body
 body {
   padding: 0 !important;
+}
+
+// Add spacing for element action buttons and change padding based on heading
+.element-header {
+  height: 62px;
+  
+  @at-root h4#{&} {
+    padding-top: 8px;
+  }
+}
+
+// Remove ability to click on side menu items that have sub-menus
+.main-menu > li.has-sub-menu > a {
+  pointer-events: none;
 }
 
 // Remove border radius from outter wrapper

@@ -7525,7 +7525,7 @@ strong {
   .all-wrapper.with-pattern {
     box-shadow: none;
     border-radius: 0px;
-    background-image: url("../img/bg-pattern2.png");
+    background-image: asset-url("rynger_cms/admin/bg-pattern2.png");
     background-size: contain;
     background-repeat: repeat;
     background-position: 0 0; }
@@ -7584,7 +7584,7 @@ strong {
 
 .content-w {
   background-color: #f2f4f8;
-  background-image: url("../img/bg-pattern.png");
+  background-image: asset-url("rynger_cms/admin/bg-pattern.png");
   background-repeat: no-repeat;
   background-position: 20px 50px;
   vertical-align: top; }

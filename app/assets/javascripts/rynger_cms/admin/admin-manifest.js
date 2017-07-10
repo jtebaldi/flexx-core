@@ -24,5 +24,6 @@
 //= require ./plugins/daterangepicker.js
 //= require ./plugins/bootstrap_components/util.js
 //= require ./plugins/bootstrap_components/tooltip.js
+//= require ./plugins/bootstrap_components/alert.js
 
 //= require ./main
