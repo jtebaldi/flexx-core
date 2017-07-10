@@ -7,3 +7,4 @@ gem 'rspec_junit_formatter'
 # gem "selenium-webdriver"
 gem 'capybara-screenshot'
 gem 'poltergeist'
+gem 'hamlit', '~> 2.8', '>= 2.8.4'

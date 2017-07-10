@@ -2,7 +2,7 @@ module CamaleonCms::Admin::MenusHelper
   include CamaleonCms::Admin::BreadcrumbHelper
 
   def admin_menus_add_commons
-    admin_menu_add_menu("dashboard", {icon: "window-content", title: t('camaleon_cms.admin.sidebar.dashboard'), url: cama_admin_dashboard_path})
+    admin_menu_add_menu("dashboard", {icon: "grid-squares-22", title: t('camaleon_cms.admin.sidebar.dashboard'), url: cama_admin_dashboard_path})
     items = []
 
     current_site.post_types.eager_load(:metas).visible_menu.all.each do |pt|
@@ -18,7 +18,7 @@ module CamaleonCms::Admin::MenusHelper
       end
       items << {icon: pt.get_option('icon', "copy"), title: pt.the_title, url: "", items: items_i } if items_i.present? #if can? :posts, pt
     end
-    admin_menu_add_menu("content", {icon: "pencil-12", title: t('camaleon_cms.admin.sidebar.contents'), url: "", items: items, datas: "data-intro='#{t("camaleon_cms.admin.intro.content")}' data-position='right' data-wait='600'"}) if items.present?
+    admin_menu_add_menu("content", {icon: "text-input", title: t('camaleon_cms.admin.sidebar.contents'), url: "", items: items, datas: "data-intro='#{t("camaleon_cms.admin.intro.content")}' data-position='right' data-wait='600'"}) if items.present?
     #end
 
     admin_menu_add_menu("media", {icon: "documents-07", title: t('camaleon_cms.admin.sidebar.media'), url: cama_admin_media_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.media")}' data-position='right'"}) if can? :manage, :media
@@ -29,7 +29,7 @@ module CamaleonCms::Admin::MenusHelper
     items << {icon: "archive", title: t('camaleon_cms.admin.sidebar.widgets'), url: cama_admin_appearances_widgets_main_index_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.widgets")}' data-position='right'"} if can? :manage, :widgets
     items << {icon: "list", title: t('camaleon_cms.admin.sidebar.menus'), url: cama_admin_appearances_nav_menus_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.menus", image: view_context.asset_path("camaleon_cms/admin/intro/menus.png"))}' data-position='right'"} if can? :manage, :nav_menu
     items << {icon: "code", title: t('camaleon_cms.admin.sidebar.shortcodes', default: "Shortcodes"), url: cama_admin_settings_shortcodes_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.shortcodes")}' data-position='right'"} if can? :manage, :shortcodes
-    admin_menu_add_menu("appearance", {icon: "ui-55", title: t('camaleon_cms.admin.sidebar.appearance'), url: "", items: items, datas: "data-intro='#{t("camaleon_cms.admin.intro.appearance")}' data-position='right' data-wait='500'"}) if items.present?
+    admin_menu_add_menu("appearance", {icon: "pencil-12", title: t('camaleon_cms.admin.sidebar.appearance'), url: "", items: items, datas: "data-intro='#{t("camaleon_cms.admin.intro.appearance")}' data-position='right' data-wait='500'"}) if items.present?
 
 
     admin_menu_add_menu("plugins", {icon: "wallet-loaded", title: "#{t('camaleon_cms.admin.sidebar.plugins')}", url: cama_admin_plugins_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.plugins")}' data-position='right'"}) if can? :manage, :plugins
@@ -197,7 +197,7 @@ module CamaleonCms::Admin::MenusHelper
     res  << "<div class='sub-menu-w'><div class='sub-menu-title'>#{title}</div><div class='sub-menu-icon'><i class='os-icon os-icon-#{icon}'></i></div><div class='sub-menu-i'><ul class='sub-menu'>"
     items.each do |item|
       res  << "<li class='#{'active' if is_active_menu(item[:key])}' #{item[:datas]}>
-                <a href='#{item[:url]}'>#{item[:title]}</a>
+                <a href='#{item.has_key?(:items) ? item[:items][0][:url] : item[:url]}'>#{item[:title]}</a>
               </li>"
     end
     res  << "</ul></div></div>"

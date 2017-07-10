@@ -1,5 +1,7 @@
-<div class="btn-group">
+<ul class="nav nav-tabs upper">
   <% @btns.each do |status, value| %>
-        <%= link_to "#{value}", {action: :index, s: status, q: params[:q] }, class: "btn cama_ajax_request #{ status.to_s == params[:s] ? "btn-info" : "btn-default" }" %>
+    <li class="nav-item">
+      <%= link_to "#{value}", {action: :index, s: status, q: params[:q] }, class: "nav-link cama_ajax_request #{ status.to_s == params[:s] ? "active" : "" }" %>
+    </li>
   <% end  %>
-</div>
+</ul>

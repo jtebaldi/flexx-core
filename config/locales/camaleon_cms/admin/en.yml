@@ -265,7 +265,7 @@ en:
       post_type:
         route_format: 'Contents Route Format'
         icons_url_desc: 'Please enter any icon name from here: '
-        all: 'All Items'
+        all: 'All'
         add: 'Add'
         add_category: 'Add Category'
         add_post_type: 'Add Post Type'

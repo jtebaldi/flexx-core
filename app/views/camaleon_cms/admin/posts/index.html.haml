@@ -1,84 +1,109 @@
-.box
-  .box-header.with-border
-    %h3.box-title
-      = t('camaleon_cms.admin.page_title.list_of', post_type: @post_type.the_title)
-      %b (slug = #{@post_type.the_slug})
-      = link_to("<i class='fa fa-eye'></i> #{t("camaleon_cms.common.visit")}".html_safe, @post_type.the_url, class: 'btn btn-xs', target: '_blank')
-    .box-tools.pull-right
-      = link_to raw("<i class='fa fa-plus'></i> #{t('camaleon_cms.admin.post_type.add')} #{@post_type.the_title}"), {action: :new}, class: "btn btn-box-action cama_ajax_request" if can? :create_post, @post_type
-  .box-body
-    .row{:style => "margin-bottom: 16px"}
-      .col-md-9
-        = render partial: "camaleon_cms/admin/posts/filter_posts"
-      .col-md-3
-        %form.cama_ajax_request{:action => "#{url_for(action: :index)}", :method => "get"}
-          .input-group
-            %input.form-control{:name => "q", :type => "text", :value => "#{params[:q]}"}/
-            %span.input-group-btn
-              %button.btn.btn-default{:type => "submit"}
-                %i.fa.fa-search
-    .table-responsive
-      %table#posts-table-list.table.table-hover.table-striped
-        %thead
-          %tr
-            %th= t('camaleon_cms.admin.table.id')
-            %th= t('camaleon_cms.admin.table.title')
-            = content_tag :th, t('camaleon_cms.admin.table.owner') if @lists_tab == "draft"
-            %th= t('camaleon_cms.admin.table.status')
-            %th= t('camaleon_cms.admin.table.author')
-            - if @post_type.manage_categories?
-              %th= t('camaleon_cms.admin.table.categories', default: 'Categories')
-            - if @post_type.manage_tags?
-              %th= t('camaleon_cms.admin.table.tags', default: 'Tags')
-            - extra_column = {post_type: @post_type, content: "", from_body: false};  hooks_run("list_post_extra_columns", extra_column)
-            = raw extra_column[:content]
-            %th= t("camaleon_cms.admin.table.updated_at", default: 'Updated at')
-            %th{:style => "width: 98px; text-align: right"}= t('camaleon_cms.admin.table.actions', default: 'Actions')
-        %tbody
-          - (@post_type.manage_hierarchy? ? cama_hierarchy_post_list(@posts.eager_load(:categories, :post_tags).decorate.to_a) : @posts.eager_load(:categories, :post_tags).decorate).each do |f| title = f.the_hierarchy_title
-            %tr{:class => "#{"sortable" if can? :update, f}", "data-id" => "#{f.id}"}
-              %td= f.id
-              %td
-                - if !f.trash? && (can? :update, f)
-                  = link_to title, {action: :edit, id: f.id}, class: "cama_ajax_request"
-                - else
-                  = title
-              = content_tag :td, f.post_parent.present? ? link_to(f.parent.decorate.the_title, {action: :edit, id: f.post_parent}, class: "cama_ajax_request") : '' if @lists_tab == "draft"
-              %td
-                = link_to raw(f.the_status), {action: :index, s: f.status}, class: "cama_ajax_request"
-              %td= f.author.fullname
-              - if @post_type.manage_categories?
-                %td= raw post_type_list_taxonomy(f.categories, "success")
-              - if @post_type.manage_tags?
-                %td= raw post_type_list_taxonomy(f.post_tags, "default")
-              - extra_column = {post: f, post_type: @post_type, content: "", from_body: true};  hooks_run("list_post_extra_columns", extra_column)
-              = raw extra_column[:content]
-              %td= f.the_updated_at
-              %td{:style => "text-align: right"}
-                - if f.published?
-                  - if f.slug.to_s.translations.present?
-                    .btn-group
-                      %button.btn.btn-info.btn-xs.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :title => "#{t('camaleon_cms.admin.button.preview')}"}
-                        %i.fa.fa-eye
-                      %ul.dropdown-menu{:style => "min-width: 50px;"}
-                        - f.the_urls.each do |k, url|
-                          %li
-                            %a{:href => url, :target => "_blank"}= k.to_s.upcase
-                  - else
-                    %a.btn.btn-info.btn-xs{:href => "#{f.the_url}", :target => "_blank", :title => "#{t('camaleon_cms.admin.button.preview')}"}
-                      %i.fa.fa-eye
-                - if f.trash?
-                  = link_to raw('<i class="fa fa-check"></i>'), {action: :restore, post_id: f.id, s: params[:s]}, class: "btn btn-success btn-xs", title: "#{t('camaleon_cms.admin.button.restore')}" if can? :update, f
-                  = link_to raw('<i class="fa fa-times"></i>'), {action: :destroy, id: f.id, s: params[:s]},                                                                                                                                                      |
-                    method: :delete, data: {confirm: t('camaleon_cms.admin.message.delete_item')}, class: "btn btn-danger btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.delete_complete', default: 'Delete completely')}" if can? :destroy, f |
-                - elsif f.draft?
-                  = link_to raw('<i class="fa fa-pencil"></i>'), {action: :edit, id: f.id}, class: "btn btn-default btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.edit')}" if can? :update, f
-                  = link_to raw('<i class="fa fa-trash"></i>'), {action: :trash, post_id: f.id, s: params[:s]},                                                                                          |
-                    data: {confirm: t('camaleon_cms.admin.message.delete')}, class: "btn btn-danger btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.move_trash')}" if can? :destroy, f |
-                - else
-                  = link_to raw('<i class="fa fa-pencil"></i>'), {action: :edit, id: f.id}, class: "btn btn-default btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.edit')}" if can? :update, f
-                  = link_to raw('<i class="fa fa-trash"></i>'), {action: :trash, post_id: f.id, s: params[:s]},                                                                                          |
-                    data: {confirm: t('camaleon_cms.admin.message.delete')}, class: "btn btn-danger btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.move_trash')}" if can? :destroy, f |
-      = content_tag("div", raw(t('camaleon_cms.admin.message.data_found_list')), class: "alert alert-warning") if @posts.empty?
-      = raw cama_do_pagination(@posts)
+= render partial: "layouts/camaleon_cms/admin/top_menu_secondary"
+.content-i  
+  .content-box
+    .element-wrapper
+      %h4.element-header
+        = @post_type.the_title
+        // %b (slug = #{@post_type.the_slug})
+        = link_to("Visit Page".html_safe, @post_type.the_url, class: 'btn btn-xs', target: '_blank')
+        .header-actions
+          = link_to raw("<i class='os-icon os-icon-edit-3'></i> New #{@post_type.the_title}"), {action: :new}, class: "btn btn-primary cama_ajax_request" if can? :create_post, @post_type
+      .element-box
+        .row
+          .col-sm-6
+            %h6.form-header #{ params[:s].mb_chars.capitalize } Posts
+          .col-sm-6
+            .element-search 
+              %form.cama_ajax_request{:action => "#{url_for(action: :index)}", :method => "get"}
+                %input{:name => "q", :type => "text", :value => "#{params[:q]}"}
+        .table-responsive  
+          %table#posts-table-list.table.table-striped
+            %thead
+              %tr
+                %th{:scope => "col"}= t('camaleon_cms.admin.table.title')
+                = content_tag :th, t('camaleon_cms.admin.table.owner') if @lists_tab == "draft"
+                %th{:scope => "col"}= t('camaleon_cms.admin.table.status')
+                // %th{:scope => "col"}= t('camaleon_cms.admin.table.author')
+                - if @post_type.manage_categories?
+                  %th{:scope => "col"}= t('camaleon_cms.admin.table.categories', default: 'Categories')
+                // - if @post_type.manage_tags?
+                //   %th{:scope => "col"}= t('camaleon_cms.admin.table.tags', default: 'Tags')
+                - extra_column = {post_type: @post_type, content: "", from_body: false};  hooks_run("list_post_extra_columns", extra_column)
+                = raw extra_column[:content]
+                %th{:scope => "col"}= t("camaleon_cms.admin.table.updated_at", default: 'Updated at')
+                %th{:style => "width: 98px; text-align: right", :scope => "col"}= t('camaleon_cms.admin.table.actions', default: 'Actions')
+            %tbody
+              - (@post_type.manage_hierarchy? ? cama_hierarchy_post_list(@posts.eager_load(:categories, :post_tags).decorate.to_a) : @posts.eager_load(:categories, :post_tags).decorate).each do |f| title = f.the_hierarchy_title
+                %tr{:class => "#{"sortable" if can? :update, f}", "data-id" => "#{f.id}"}
+                  %td{:scope => "row"}
+                    - if !f.trash? && (can? :update, f)
+                      = link_to title, {action: :edit, id: f.id}, class: "cama_ajax_request"
+                    - else
+                      = title
+                  = content_tag :td, f.post_parent.present? ? link_to(f.parent.decorate.the_title, {action: :edit, id: f.post_parent}, class: "cama_ajax_request") : '' if @lists_tab == "draft"
+                  %td{"data-title" => "Status"}
+                    = link_to raw(f.the_status), {action: :index, s: f.status}, class: "cama_ajax_request"
+                  // %td{"data-title" => "Author"}= f.author.fullname
+                  - if @post_type.manage_categories?
+                    %td{"data-title" => "Categories"}= raw post_type_list_taxonomy(f.categories, "success")
+                  // - if @post_type.manage_tags?
+                  //   %td{"data-title" => "Tags"}= raw post_type_list_taxonomy(f.post_tags, "default")
+                  - extra_column = {post: f, post_type: @post_type, content: "", from_body: true};  hooks_run("list_post_extra_columns", extra_column)
+                  = raw extra_column[:content]
+                  %td{"data-title" => "Updated at"}= f.the_updated_at
+                  %td{:style => "text-align: right"}
+                    - if f.published?
+                      - if f.slug.to_s.translations.present?
+                        .btn-group
+                          %button.btn.btn-info.btn-xs.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :title => "#{t('camaleon_cms.admin.button.preview')}"}
+                            %i.fa.fa-eye
+                          %ul.dropdown-menu{:style => "min-width: 50px;"}
+                            - f.the_urls.each do |k, url|
+                              %li
+                                %a{:href => url, :target => "_blank"}= k.to_s.upcase
+                      - else
+                        %a.btn.btn-info.btn-xs{:href => "#{f.the_url}", :target => "_blank", :title => "#{t('camaleon_cms.admin.button.preview')}"}
+                          %i.fa.fa-eye
+                    - if f.trash?
+                      = link_to raw('<i class="fa fa-check"></i>'), {action: :restore, post_id: f.id, s: params[:s]}, class: "btn btn-success btn-xs", title: "#{t('camaleon_cms.admin.button.restore')}" if can? :update, f
+                      = link_to raw('<i class="fa fa-times"></i>'), {action: :destroy, id: f.id, s: params[:s]},                                                                                                                                                      |
+                        method: :delete, data: {confirm: t('camaleon_cms.admin.message.delete_item')}, class: "btn btn-danger btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.delete_complete', default: 'Delete completely')}" if can? :destroy, f |
+                    - elsif f.draft?
+                      = link_to raw('<i class="fa fa-pencil"></i>'), {action: :edit, id: f.id}, class: "btn btn-default btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.edit')}" if can? :update, f
+                      = link_to raw('<i class="fa fa-trash"></i>'), {action: :trash, post_id: f.id, s: params[:s]},                                                                                          |
+                        data: {confirm: t('camaleon_cms.admin.message.delete')}, class: "btn btn-danger btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.move_trash')}" if can? :destroy, f |
+                    - else
+                      = link_to raw('<i class="fa fa-pencil"></i>'), {action: :edit, id: f.id}, class: "btn btn-default btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.edit')}" if can? :update, f
+                      = link_to raw('<i class="fa fa-trash"></i>'), {action: :trash, post_id: f.id, s: params[:s]},                                                                                          |
+                        data: {confirm: t('camaleon_cms.admin.message.delete')}, class: "btn btn-danger btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.move_trash')}" if can? :destroy, f |
+        = content_tag("div", raw(t('camaleon_cms.admin.message.data_found_list')), class: "alert alert-warning") if @posts.empty?
+        = raw cama_do_pagination(@posts)
+          
+// %thead
+//   %tr
+//     %th{:scope => "col"} Film Title
+//     %th{:scope => "col"} Released
+//     %th{:scope => "col"} Studio
+//     %th{:scope => "col"} Worldwide Gross
+//     %th{:scope => "col"} Domestic Gross
+//     %th{:scope => "col"} Foreign Gross
+//     %th{:scope => "col"} Budget
+// %tbody
+//   %tr
+//     %th{:scope => "row"} Frozen
+//     %td{"data-title" => "Released"} 2013
+//     %td{"data-title" => "Studio"} Disney
+//     %td{"data-title" => "Worldwide Gross", "data-type" => "currency"} $1,287,000,000
+//     %td{"data-title" => "Domestic Gross", "data-type" => "currency"} $400,738,009
+//     %td{"data-title" => "Foreign Gross", "data-type" => "currency"} $875,742,326
+//     %td{"data-title" => "Budget", "data-type" => "currency"} $150,000,000
+//   %tr
+//     %th{:scope => "row"} Minions
+//     %td{"data-title" => "Released"} 2015
+//     %td{"data-title" => "Studio"} Universal
+//     %td{"data-title" => "Worldwide Gross", "data-type" => "currency"} $1,159,398,397
+//     %td{"data-title" => "Domestic Gross", "data-type" => "currency"} $336,045,770
+//     %td{"data-title" => "Foreign Gross", "data-type" => "currency"} $823,352,627
+//     %td{"data-title" => "Budget", "data-type" => "currency"} $74,000,000
+
     

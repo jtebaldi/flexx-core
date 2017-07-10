@@ -1,24 +1,24 @@
 <div class="desktop-menu menu-side-compact-w menu-activated-on-hover color-scheme-dark">
   <div class="logo-w">
-    <a class="logo" href="index.html"><img src="img/logo.png"></a>
+    <a class="logo" href="index.html"><img src="<%= asset_path 'rynger_cms/app-logo_square.png' %>"></a>
   </div>
   <div class="menu-and-user">
     <div class="logged-user-w">
       <div class="logged-user-i">
         <div class="avatar-w">
-          <img alt="" src="img/avatar1.jpg">
+          <img alt="" src="<%= cama_current_user.the_avatar %>">
         </div>
         <div class="logged-user-menu">
           <div class="logged-user-avatar-info">
             <div class="avatar-w">
-              <img alt="" src="img/avatar1.jpg">
+              <img alt="" src="<%= cama_current_user.the_avatar %>">
             </div>
             <div class="logged-user-info-w">
               <div class="logged-user-name">
-                Maria Gomez
+                <%= cama_current_user.fullname %>
               </div>
               <div class="logged-user-role">
-                Administrator
+                <%= cama_current_user.the_role %>
               </div>
             </div>
           </div>
@@ -27,19 +27,13 @@
           </div>
           <ul>
             <li>
-              <a href="apps_email.html"><i class="os-icon os-icon-mail-01"></i><span>Incoming Mail</span></a>
+              <a href="<%= cama_admin_profile_edit_path %>"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile</span></a>
             </li>
+            <!--<li>-->
+            <!--  <a href="#"><i class="os-icon os-icon-others-43"></i><span>Notifications</span></a>-->
+            <!--</li>-->
             <li>
-              <a href="users_profile_big.html"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a>
-            </li>
-            <li>
-              <a href="users_profile_small.html"><i class="os-icon os-icon-coins-4"></i><span>Billing Details</span></a>
-            </li>
-            <li>
-              <a href="#"><i class="os-icon os-icon-others-43"></i><span>Notifications</span></a>
-            </li>
-            <li>
-              <a href="#"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a>
+              <a href="<%= cama_admin_logout_path %>"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a>
             </li>
           </ul>
         </div>
@@ -47,6 +41,13 @@
     </div>
     <ul class="main-menu">
       <%= raw _admin_menu_draw %>
+      <li data-toggle="tooltip" data-placement="right" title="" class="" data-intro="This will take you to your live site." data-position="right" data-original-title="View the live site">
+        <a href="<%= current_site.the_url(locale: nil) %>" target="_blank">
+          <div class="icon-w">
+            <i class="os-icon os-icon-window-content"></i>
+          </div>
+        </a>
+      </li>
     </ul>
   </div>
 </div>
