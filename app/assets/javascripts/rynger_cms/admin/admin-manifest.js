@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-
+//= require jquery_ujs
 //= require ./plugins/perfect-scrollbar.jquery.js
 //= require ./plugins/moment.js
 //= require ./plugins/Chart.min.js
@@ -27,3 +27,4 @@
 //= require ./plugins/bootstrap_components/alert.js
 
 //= require ./main
+//= require ./custom

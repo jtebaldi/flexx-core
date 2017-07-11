@@ -9,6 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require font-awesome
+ *= require camaleon_cms/admin/introjs/_introjs.min
  *= require ./main
  *= require ./custom
  */

@@ -234,6 +234,31 @@ body {
   }
 }
 
+// Make top secondary menu sticky
+$nav-height: 63px; // Height of top menu
+
+.top-menu-secondary {
+  width: 100%;
+  height: $nav-height;
+  line-height: $nav-height;
+  position: relative;
+  margin-bottom: -$nav-height; //negative margin set to div height to stop the page jumping when the sticky fixed class is added
+  z-index: 3;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+}
+
+// Move active underline to top of top menu
+// .top-menu-secondary > ul li a:after { REMOVE BOTTOM: 0px; }
+
+// Fit Settings popup on screen
+.main-menu > li[data-key="settings"] > .sub-menu-w {
+  top: -300px !important;
+}
+
 // Use desktop side menu instead of mobile side menu from 768-1024px
 @media (max-width: 1024px) and (min-width: 768px) {
   .menu-mobile {

@@ -10,19 +10,9 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
 //= require ./_data
-//= require camaleon_cms/bootstrap.min
-//= require ./_jquery-ui.min
 //= require ./_underscore
 //= require ./jquery.validate
-
-// date picker
-//= require ./momentjs/_moment
-//= require ./_bootstrap-datepicker
-
-//= require jquery_ujs
-//= require ./_bootstrap-select
 
 //= require ./_jquery.slugify
 //= require ./_translator
@@ -38,8 +28,6 @@
 
 //= require ./tageditor/_jquery.caret.min
 //= require ./tageditor/_jquery.tag-editor
-
-//= require ./lte/app
 
 // tinymce
 //= require tinymce-jquery
