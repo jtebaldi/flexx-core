@@ -51,10 +51,7 @@ var init_form_validations = function (form, args) {
     });
 
     (form ? form : $('#admin_content form')).each(function () {
-        var $form = $(this)
-        if ($form.find('.translatable').size() > 0) {
-            $form.find('.translatable').Translatable();
-        }
+        
     }).filter(".validate").each(function () {
         $(this).validate(args['validate_settings'])
     });

@@ -1,5 +1,35 @@
 // ---------------------------------------- Added
 
+// Mobile User edit
+#mobile_user_edit {
+  color: #fff;
+  &:hover, &:active {
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+// Mobile back button
+.mobile-back-btn {
+  line-height: 1;
+  
+  a {
+    font-size: 20px;
+    color: #fff;
+    
+    &:hover, &:active {
+      text-decoration: none;}  
+  }
+}
+
+// Mobile logout button
+#btn_logout {
+  background: white;
+  color: #1c4cc3;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center; }
+
 // Custom responsive tables
 
 $bp-maggie: 15em; 
@@ -219,8 +249,7 @@ body {
     padding: 15px 10px 0;
     & :hover {
       -webkit-transform: translateY(3px);
-      transform: translateY(3px);
-    }
+      transform: translateY(3px);}
   
     & > span {
       font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
@@ -254,7 +283,8 @@ ul.sub-menu > li > a:hover {
 
 // Remove gradient from mobile menu background
 .menu-mobile.color-scheme-dark {
-  background: #1c4cc3 !important; }
+  background: #1c4cc3 !important;
+  z-index: 4; }
 
 // Added new class "current" to show active menu item without displaying the submenu
 .menu-side-compact-w ul.main-menu > li.current {
@@ -270,12 +300,23 @@ ul.sub-menu > li > a:hover {
 $nav-height: 63px; // Height of top menu
 
 .top-menu-secondary {
-  width: 100%;
   height: $nav-height;
+  max-height: $nav-height;
   line-height: $nav-height;
   position: relative;
   margin-bottom: -$nav-height; //negative margin set to div height to stop the page jumping when the sticky fixed class is added
   z-index: 3;
+  
+  @media (max-width: 767px) {
+    width: 100% !important; }
+  
+  .logged-user-w {
+    line-height: 1rem; }
+}
+
+@media (max-width: 767px) {
+  .top-menu-secondary:not(.locked) {
+    display: none;}
 }
 
 .sticky {
@@ -303,7 +344,7 @@ $nav-height: 63px; // Height of top menu
 
 // Make side menu full height
 .menu-side-compact-w ul.main-menu {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 // Make side menu sticky
@@ -326,13 +367,67 @@ $nav-height: 63px; // Height of top menu
 .top-settings a {
   &:hover, &:visited, &:active, &:focus {
     text-decoration: none;
-    cursor: pointer;
-  }
-  
+    cursor: pointer; }
 }
+
+// Flash messages
+.flash_messages .alert {
+  position: absolute;
+  z-index: 10;
+  right: 15px;
+  top: 10px; }
 
 // ---------------------------------------- Overrides for Camaleon
 
 // Flash messages
 .flash_messages {
   padding: 10px 20px 0; }
+  
+// Pagination
+.pagination_panel {
+  .total-items {
+    text-align: right;}
+    
+  .pagination {
+    & * { 
+      margin-right: 15px;}
+    
+    .previous_page.disabled, .next_page.disabled {
+      display: none;}
+  }
+  
+  @media (max-width: 767px) {
+    .pagination {
+      margin-bottom: 15px;
+      
+      .previous_page, .next_page, em {
+        text-align: center;
+        width: 33%;
+        line-height: 2.3em; }
+      
+      .previous_page, .next_page {
+        border: 1px solid;
+        border-radius: 4px;
+        padding: 3px 7px;
+        
+        &:hover, &:active  {
+          text-decoration: none; }
+        
+        &.disabled {
+          display: block;
+          opacity: 0;}
+      }
+      
+      em {
+        font-weight: bold;
+        font-size: 1.25em; }
+      
+      a:not(.next_page):not(.previous_page) {
+        display: none;}
+    }
+    
+    .total-items {
+      text-align: center;}
+    
+  }
+}

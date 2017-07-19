@@ -35,4 +35,15 @@ $( document ).ready(function() {
   $(".menu-side-compact-w ul.main-menu").hover(function() {
     $(this).toggleClass("show-helpers");
   });
+  
+  // Add content-panel if present
+  var elementExists = document.getElementById("side-panel");
+
+  if (elementExists) {
+    $(".all-wrapper").addClass("with-side-panel");
+  }
+  
+  // Make alerts disappear
+  $(".flash_messages .alert").delay(200).fadeOut(3500);
+  
 });

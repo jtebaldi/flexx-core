@@ -1,12 +1,12 @@
 /* surrounding tag container */
 .tag-editor {
     list-style-type: none; padding: 0 5px 0 0; margin: 0; overflow: hidden; border: 1px solid #eee; cursor: text;
-    font: normal 14px sans-serif; color: #555; background: #fff;
+    font: normal 14px sans-serif; color: #555; background: #fafafa;
 }
 
 /* core styles usually need no change */
 .tag-editor li { display: block; float: left; overflow: hidden; margin: 3px 0; line-height: 1.5; }
-.tag-editor div { float: left; padding: 0 4px; }
+.tag-editor div { float: left; padding: 5px; }
 .tag-editor .placeholder { padding: 0 8px; color: #bbb; }
 .tag-editor .tag-editor-spacer { padding: 0; width: 8px; overflow: hidden; color: transparent; background: none; }
 .tag-editor input {
@@ -21,19 +21,19 @@
 
 /* tag style */
 .tag-editor .tag-editor-tag {
-    padding-left: 5px; color: #46799b; background: #e0eaf1; white-space: nowrap;
-    overflow: hidden; cursor: pointer; border-radius: 2px 0 0 2px;
+    padding: 5px 0px 5px 10px; color: #3E4B5B; background: #e2ebff; white-space: nowrap;
+    overflow: hidden; cursor: pointer; border-radius: 4px 0 0 4px;
 }
 
 /* delete icon */
-.tag-editor .tag-editor-delete { cursor: pointer; padding-right: 5px; border-radius: 0 2px 2px 0; }
+.tag-editor .tag-editor-delete { cursor: pointer; padding-right: 5px; border-radius: 0 4px 4px 0; background: #e2ebff; }
 .tag-editor .tag-editor-delete i {
     display: inline-block; width: 7px; height: 7px; vertical-align: middle;
-    position: relative; top: -4px;
+    position: relative; top: -4px; padding-right: 15px;
 }
 .tag-editor .tag-editor-delete:hover i { color: #a94442; }
 .tag-editor .tag-editor-tag.active+.tag-editor-delete,
-.tag-editor .tag-editor-tag.active+.tag-editor-delete i { cursor: text; }
+.tag-editor .tag-editor-tag.active+.tag-editor-delete i { cursor: text; background: #fff;}
 
 .tag-editor .tag-editor-tag.active { background: none !important; }
 
@@ -45,5 +45,5 @@
 .ui-widget-content { border: 1px solid #bbb; background: #fff; color: #555; }
 .ui-widget-content a { color: #46799b; }
 .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus,
-.ui-widget-header .ui-state-focus { background: #e0eaf1; }
+.ui-widget-header .ui-state-focus { background: #fafafa; }
 .ui-helper-hidden-accessible { display: none; }

@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require camaleon_cms/admin/_jquery-ui.min.js
 //= require ./plugins/perfect-scrollbar.jquery.js
 //= require ./plugins/moment.js
 //= require ./plugins/Chart.min.js

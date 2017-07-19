@@ -1,5 +1,10 @@
 <div class="menu-mobile menu-activated-on-click color-scheme-dark">
   <div class="mm-logo-buttons-w">
+    <div class="mobile-back-btn">  
+      <%= link_to :back do %>
+        <i class="os-icon os-icon-common-07"></i>
+      <% end %>
+    </div>
     <a class="mm-logo" href="index.html"><img src="<%= asset_path 'rynger_cms/app-logo.png' %>"></a>
     <div class="mm-buttons">
       <div class="content-panel-open">
@@ -11,37 +16,44 @@
     </div>
   </div>
   <div class="menu-and-user">
-    <div class="logged-user-w">
-      <div class="avatar-w">
-        <img alt="" src="<%= cama_current_user.the_avatar %>">
-      </div>
-      <div class="logged-user-info-w">
-        <div class="logged-user-name">
-          <%= cama_current_user.fullname %>
+    <a href="<%= cama_admin_profile_edit_path %>" id="mobile_user_edit">
+      <div class="logged-user-w">
+        <div class="avatar-w">
+          <img alt="" src="<%= cama_current_user.the_avatar %>">
         </div>
-        <div class="logged-user-role">
-          <%= cama_current_user.the_role %>
+        <div class="logged-user-info-w">
+          <div class="logged-user-name">
+            <%= cama_current_user.fullname %>
+          </div>
+          <div class="logged-user-role">
+            <%= cama_current_user.the_role %>
+          </div>
         </div>
       </div>
-    </div>
+    </a>
     <!--------------------
     START - Mobile Menu List
     -------------------->
     <ul class="main-menu">
       <%= raw _admin_mobile_menu_draw %>
+      <li>
+        <a href="<%= cama_admin_logout_path %>" id="btn_logout">
+          <span>Logout</span>
+        </a>
+      </li>
     </ul>
     <!--------------------
     END - Mobile Menu List
     -------------------->
     <div class="mobile-menu-magic">
       <h4>
-        Light Admin
+        flexx.
       </h4>
       <p>
-        Clean Bootstrap 4 Template
+        by Rynger
       </p>
       <div class="btn-w">
-        <a class="btn btn-white btn-rounded" href="https://themeforest.net/item/light-admin-clean-bootstrap-dashboard-html-template/19760124?ref=Osetin" target="_blank">Purchase Now</a>
+        <a class="btn btn-white btn-rounded" href="#" target="_blank">Support</a>
       </div>
     </div>
   </div>
