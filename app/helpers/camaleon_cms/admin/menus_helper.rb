@@ -128,8 +128,8 @@ module CamaleonCms::Admin::MenusHelper
     @_tmp_menu_parents = []
     menus = _get_url_current
     menus.each do |menu|
-      res << "<li data-key='#{menu[:key]}' #{!menu.has_key?(:items) ? "data-toggle='tooltip' data-placement='right' title='" + menu[:title] + "'" : ""} class='#{"has-sub-menu" if menu.has_key?(:items)} #{"current" if is_active_menu(menu[:key])}' #{menu[:datas]}>
-        <a href='#{menu[:url]}'><div class='icon-w'><i class='os-icon os-icon-#{menu[:icon]}'></i></div></a>
+      res << "<li data-key='#{menu[:key]}' class='#{"has-sub-menu" if menu.has_key?(:items)} #{"current" if is_active_menu(menu[:key])}' #{menu[:datas]}>
+        <a href='#{menu[:url]}'><div class='icon-w'><i class='os-icon os-icon-#{menu[:icon]}'></i></div><span>#{menu[:title]}</span></a>
         #{_admin_menu_draw(menu[:items], menu[:title], menu[:icon]) if menu.has_key?(:items)}
         </li>"
     end

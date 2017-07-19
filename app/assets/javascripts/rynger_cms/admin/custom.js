@@ -30,4 +30,9 @@ $( document ).ready(function() {
     }
   }).trigger('resize');
   
+  
+  // Showing span helpers on side menu hover
+  $(".menu-side-compact-w ul.main-menu").hover(function() {
+    $(this).toggleClass("show-helpers");
+  });
 });

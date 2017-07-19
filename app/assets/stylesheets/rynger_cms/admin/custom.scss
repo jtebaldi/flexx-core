@@ -190,15 +190,13 @@ $bp-homer: 75em;
 // ---------------------------------------- Overrides for Bootstrap
 
 .btn {
-  line-height: 1.9;
-}
+  line-height: 1.9; }
 
 // ---------------------------------------- Overrides/modifications for Light
 
 // Remove padding from body
 body {
-  padding: 0 !important;
-}
+  padding: 0 !important; }
 
 // Add spacing for element action buttons and change padding based on heading
 .element-header {
@@ -210,19 +208,53 @@ body {
 }
 
 // Remove ability to click on side menu items that have sub-menus
-.main-menu > li.has-sub-menu > a {
-  pointer-events: none;
+.menu-side-compact-w ul.main-menu > li.has-sub-menu > a {
+  pointer-events: none; }
+
+// Remove lines between side menu and add helper spans on hover
+.menu-side-compact-w ul.main-menu > li {
+  border-bottom: none;
+  
+  & > a  {
+    padding: 15px 10px 0;
+    & :hover {
+      -webkit-transform: translateY(3px);
+      transform: translateY(3px);
+    }
+  
+    & > span {
+      font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+      font-weight: 200;
+      font-size: 0.66rem;
+      letter-spacing: 0.04rem;
+      color: white;
+      text-transform: uppercase;
+      position: relative;
+      top: -4px; 
+      -webkit-transform: translateX(-200px);
+      transform: translateX(-200px);
+      transition: 0.1s;
+      display: block;}
+  }
+}
+
+ul.sub-menu > li > a:hover {
+  -webkit-transform: translateY(3px);
+  transform: translateY(3px);
+}
+
+.menu-side-compact-w ul.main-menu.show-helpers > li > a > span {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
 }
 
 // Remove border radius from outter wrapper
 .all-wrapper, .menu-side-compact-w {
-  border-radius: 0px;
-}
+  border-radius: 0px; }
 
 // Remove gradient from mobile menu background
 .menu-mobile.color-scheme-dark {
-  background: #1c4cc3 !important;
-}
+  background: #1c4cc3 !important; }
 
 // Added new class "current" to show active menu item without displaying the submenu
 .menu-side-compact-w ul.main-menu > li.current {
@@ -256,8 +288,7 @@ $nav-height: 63px; // Height of top menu
 
 // Fit Settings popup on screen
 .main-menu > li[data-key="settings"] > .sub-menu-w {
-  top: -300px !important;
-}
+  top: -300px !important; }
 
 // Use desktop side menu instead of mobile side menu from 768-1024px
 @media (max-width: 1024px) and (min-width: 768px) {
@@ -269,6 +300,20 @@ $nav-height: 63px; // Height of top menu
     vertical-align: top;
   }
 }
+
+// Make side menu full height
+.menu-side-compact-w ul.main-menu {
+  height: 100vh;
+}
+
+// Make side menu sticky
+// @media (min-height: 850px) {
+//   .menu-side-compact-w ul.main-menu {
+//     position: -webkit-sticky;
+//     position: sticky;
+//     top: 30px;
+//   }
+// }
 
 // Contain logo image on login page
 .auth-box-w > .logo-w {
@@ -290,5 +335,4 @@ $nav-height: 63px; // Height of top menu
 
 // Flash messages
 .flash_messages {
-  padding: 10px 20px 0;
-}
+  padding: 10px 20px 0; }
