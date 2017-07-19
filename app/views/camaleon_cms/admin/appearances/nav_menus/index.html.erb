@@ -1,18 +1,23 @@
-<div class="box box-primary">
-    <div class="box-header with-border">
-        <h3 class="box-title"><%= t('camaleon_cms.admin.menus.menus', default: 'Menus') %></h3>
+<div class="content-i">
+  <div class="content-box">
+    <div class="element-wrapper">
+      <h4 class="element-header">Menus</h4>
     </div>
-    <div class="box-body">
-        <div class="page-content-wrap">
-            <div class="row">
-                <div id="menu_content">
-                    <div id="menu_items" class="col-md-5">
-                        <%= render "menu_options" %>
-                        <%= render('left_menu_items') if @nav_menu.present? %>
-                    </div>
-                    <%= render("menu_items_list") if @nav_menu.present? %>
-                </div>
+    <div class="row">
+      <div class="col-sm-7">
+        <div class="element-box">
+          <div id="menu_content">
+            <div id="menu_items" class="col-md-5">
+              <%= render "menu_options" %>
+              <%= render('left_menu_items') if @nav_menu.present? %>
             </div>
+            <%= render("menu_items_list") if @nav_menu.present? %>
+          </div>
         </div>
+      </div>
     </div>
-</div>    
+      
+      
+    
+  </div>
+</div>

@@ -1,0 +1,34 @@
+.content-i  
+  .content-box
+    .element-wrapper
+      .element-actions
+        = link_to raw("<i class='fa fa-plus'></i> #{t('camaleon_cms.admin.users.add_user_role')}"), {action: :new}, class: "btn btn-primary pull-right cama_ajax_request" if cama_current_user.the_role == "Administrator"
+      %h4.element-header User Roles
+      .element-box
+        .table-responsive 
+          %table.table.table-striped.table-hover
+            %thead
+              %tr
+                %th= t('camaleon_cms.admin.table.name')
+                %th= t('camaleon_cms.admin.table.description')
+                - if cama_current_user.the_role == "Administrator"
+                  %th
+                    - t('camaleon_cms.admin.table.actions')
+                  %th= t('camaleon_cms.admin.table.id')
+            %tbody
+              - @user_roles.decorate.each do |f|
+                %tr
+                  %td= f.the_title
+                  %td= f.the_content
+                  .btn.group
+                    - if cama_current_user.the_role == "Administrator"
+                      %td
+                        = link_to raw('<i class="fa fa-pencil"></i>'), {action: :edit, id: f.id }, class: "btn btn-default btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.edit')}"
+                        - if f.editable?
+                          = link_to raw('<i class="fa fa-times"></i>'), { action: :destroy, id: f.id }, method: :delete, data: { confirm: t('camaleon_cms.admin.message.delete_item') }, class: "btn btn-danger btn-xs cama_ajax_request", title: t('camaleon_cms.admin.button.delete')
+                        - else
+                          = link_to 'javascript:;', disabled: true, class: 'btn btn-danger btn-xs cama_ajax_request', title: t('camaleon_cms.admin.users.message.role_can_not_be_deleted', default: 'This role can not be deleted') do
+                            %i.fa.fa-times
+                    %td= f.id
+          = content_tag("div", raw(t('camaleon_cms.admin.message.data_found_list')), class: "alert alert-warning") if @user_roles.empty?
+          = raw cama_do_pagination(@user_roles)

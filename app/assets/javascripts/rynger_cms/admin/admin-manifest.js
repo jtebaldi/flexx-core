@@ -18,6 +18,7 @@
 //= require ./plugins/select2.full.min.js
 //= require ./plugins/ckeditor.js
 //= require ./plugins/tether.min.js
+//= require ./plugins/jquery.nestable.js
 
 // Bootstrap
 //= require ./plugins/validator.min.js
