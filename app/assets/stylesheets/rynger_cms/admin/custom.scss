@@ -324,8 +324,17 @@ $nav-height: 63px; // Height of top menu
   top: 0;
 }
 
-// Move active underline to top of top menu
-// .top-menu-secondary > ul li a:after { REMOVE BOTTOM: 0px; }
+// Allow top menu to scroll-x
+.top-menu-secondary > ul { 
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+  .top-menu-secondary {
+    overflow: inherit !important;
+  }
+}
 
 // Fit Settings popup on screen
 .main-menu > li[data-key="settings"] > .sub-menu-w {
