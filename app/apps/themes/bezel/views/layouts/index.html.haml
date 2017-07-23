@@ -1,0 +1,42 @@
+!!! 5
+%html
+  %head
+    %meta{:charset => "UTF-8"}
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    
+    %title= current_site.the_title
+    
+    = stylesheet_link_tag theme_asset_path("css/main")
+    = javascript_include_tag theme_asset_path("js/main.js")
+    = raw the_head
+    
+  %body
+    / Preloader
+    #loader
+      .centrize
+        .v-center
+          #mask
+            %svg.preloader-icon{:height => "38", :viewbox => "0 0 34 38", :width => "34"}
+              %path.preloader-path{:d => "M29.437 8.114L19.35 2.132c-1.473-.86-3.207-.86-4.68 0L4.153 8.114C2.68 8.974 1.5 10.56 1.5 12.28v11.964c0 1.718 1.22 3.306 2.69 4.165l10.404 5.98c1.47.86 3.362.86 4.834 0l9.97-5.98c1.472-.86 2.102-2.45 2.102-4.168V12.28c0-1.72-.59-3.306-2.063-4.166z", "stroke-dashoffset" => "0"}
+    / End Preloader
+    #wrapper
+      %nav#navbar
+        .navbar-wrapper
+          .container
+            .logo
+              %a{:href => "#{current_site.the_url}"}
+                %img.logo-light{:alt => "Logo", :src => "#{current_site.the_logo}"}
+                %img.logo-dark{:alt => "Logo", :src => "#{current_site.the_logo}"}
+      %section.height-100.dark-bg
+        #particle-canvas{"data-dot-color" => "#00c3da", "data-line-color" => "#2f2f2f"}
+        .centrize
+          .v-center
+            .container
+              .error-page
+                .title
+                  %h1.colored-text{:style => "font-size: 80px;"} Under Contruction
+                  %h2 We're about to launch the new site
+                  %h4 Check back soon
+                %a.btn.btn-color{:href => "mailto:#{current_theme.the_field('business_email')}"} Contact
