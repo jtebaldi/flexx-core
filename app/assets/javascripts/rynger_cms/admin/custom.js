@@ -2,14 +2,14 @@ $( document ).ready(function() {
   var topMenu = $(".top-menu-secondary");
       stickyDiv = "sticky";
       mobileMenu = $('.menu-mobile');
+      topMenuDisplay = topMenu.css('display');
       
-  if (topMenu.length) {
+  if ((topMenu.length) && (topMenuDisplay != 'none')) {
     extraPadding = topMenu.height();
     topMenu.next().css("padding-top", extraPadding);
   }
       
   $(window).bind("resize", function () {
-    console.log($('.all-wrapper').width());
     containerWidth = ($('.all-wrapper').width()) - ($('.desktop-menu').width());
     
     if ($(this).width() > 767) {
@@ -45,5 +45,11 @@ $( document ).ready(function() {
   
   // Make alerts disappear
   $(".flash_messages .alert").delay(200).fadeOut(3500);
+  
+
+  $(".nav a").on("click", function(e){
+    $(".nav").find(".current").removeClass("current");
+    $(this).closest('li').addClass("current");
+  });
   
 });

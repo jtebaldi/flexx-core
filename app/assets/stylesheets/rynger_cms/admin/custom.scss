@@ -1,12 +1,18 @@
 // ---------------------------------------- Added
 
+// App logo resizing
+#side-menu-logo {
+  padding: 11px !important;}
+  
+.menu-mobile .mm-logo-buttons-w .mm-logo img {
+  width: 70px !important;}
+
 // Mobile User edit
 #mobile_user_edit {
   color: #fff;
   &:hover, &:active {
     color: #fff;
-    text-decoration: none;
-  }
+    text-decoration: none;}
 }
 
 // Mobile back button
@@ -217,6 +223,15 @@ $bp-homer: 75em;
   }
 }
 
+// Nav tabs active -> current
+.top-menu-secondary > ul li.current a {
+  color: #3E4B5B;
+  text-decoration: none;
+  
+  &:after {
+    width: 100%; }
+}
+
 // ---------------------------------------- Overrides for Bootstrap
 
 .btn {
@@ -333,6 +348,14 @@ $nav-height: 63px; // Height of top menu
 @media (max-width: 1024px) and (min-width: 768px) {
   .top-menu-secondary {
     overflow: inherit !important;
+  }
+}
+
+.top-menu-secondary > ul li a {
+  padding: 0px 25px;
+  
+  @media (max-width: 767px) {
+    padding: 0px 10px;  
   }
 }
 

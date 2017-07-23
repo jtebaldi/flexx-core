@@ -4,20 +4,22 @@
       <i class="os-icon os-icon-common-07"></i>
     <% end %>
   </div>
-  <ul>
+  <ul class="nav" role="<%= @tabs ? 'tablist' : '' %>">
     <% if @btns %>
       <% @btns.each do |status, value| %>
         <li class="<%= status.to_s == params[:s] ? 'active' : '' %>">
           <%= link_to "#{value}", {action: :index, s: status, q: params[:q] }, class: "nav-link cama_ajax_request" %>
         </li>
-      <% end  %>
-    <% end  %>
-    <!--<li>-->
-    <!--  <a href="#"><i class="os-icon os-icon-common-07"></i></a>-->
-    <!--</li>-->
-    <!--<li class="active">-->
-    <!--  <a href="#">Home</a>-->
-    <!--</li>-->
+      <% end %>
+    <% elsif @tabs %>
+      <% @tabs.each_with_index do |tab, index| %>
+        <li class="nav-item <%= 'active' if index == 0 %>">
+          <%= link_to "#{tab}", "#tab-#{tab}", class: "nav-link cama_ajax_request", "aria-expanded": "false", "data-toggle": "tab", role: "tab" %>
+        </li>
+      <% end %>
+    <% else %>
+      <li class="active"><a href="#" class="nav-link"><%= current_site.the_title %></a></li>
+    <% end %>
   </ul>
   <div class="top-menu-controls">
     <!--<form action="<%= cama_admin_search_path %>" method="get" class="sidebar-form cama_ajax_request">-->

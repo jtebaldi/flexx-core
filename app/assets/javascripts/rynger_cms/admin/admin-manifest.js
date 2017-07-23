@@ -27,6 +27,7 @@
 //= require ./plugins/bootstrap_components/util.js
 //= require ./plugins/bootstrap_components/tooltip.js
 //= require ./plugins/bootstrap_components/alert.js
+//= require ./plugins/bootstrap_components/tab.js
 
 //= require ./main
 //= require ./custom
