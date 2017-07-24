@@ -352,11 +352,10 @@ section.page-title {
 section.page-title.parallax-section {
   height: 550px;
 }
-section.page-title .bp-desktop({
-    h1{
-      font-size: 58px;
-    }
-  }) .title {
+section.page-title .bp-desktop h1 {
+  font-size: 58px;
+}
+section.page-title .bp-desktop .title {
   margin-bottom: 0;
 }
 .grey-bg {
