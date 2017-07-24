@@ -15,11 +15,13 @@
 //= require ./jquery.validate
 
 //= require ./_jquery.slugify
+//= require ./_translator
 //= require ./_i18n
 //= require ./_custom_fields
 
 //= require ./_libraries
 //= require ./_actions
+//= require ./introjs/_intro.min
 
 // uploader
 //= require ./uploader/uploader_manifest

@@ -28,6 +28,7 @@
 //= require ./plugins/bootstrap_components/tooltip.js
 //= require ./plugins/bootstrap_components/alert.js
 //= require ./plugins/bootstrap_components/tab.js
+//= require ./plugins/bootstrap_components/modal.js
 
 //= require ./main
 //= require ./custom
