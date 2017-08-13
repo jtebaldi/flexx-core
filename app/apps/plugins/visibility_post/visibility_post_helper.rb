@@ -115,8 +115,11 @@ module Plugins::VisibilityPost::VisibilityPostHelper
     res = []
     current_groups = []
     current_groups = post.visibility_value.split(",") if post.visibility == "private"
-    current_site.user_roles.each do |role|
-      res << "<label><input type='checkbox' name='post_private_groups[]' class='' value='#{role.slug}' #{"checked=''" if current_groups.include?(role.slug.to_s) }> #{role.name}</label><br>"
+    res << '<label class="hidden"><input type="checkbox" name="post_private_groups[]" class="required data-error-place-parent" value="admin" checked="checked"> Administrator</label>'
+    current_site.user_roles.each_with_index do |role, index|
+      if index != 0
+        res << "<label><input type='checkbox' name='post_private_groups[]' class='' value='#{role.slug}' #{"checked=''" if current_groups.include?(role.slug.to_s) }> #{role.name}</label><br>"
+      end
     end
     res.join("")
   end

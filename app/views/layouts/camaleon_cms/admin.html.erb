@@ -7,14 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <%= stylesheet_link_tag "camaleon_cms/admin/admin-manifest", media: "all" %>
+    <%= stylesheet_link_tag "camaleon_cms/admin/lte/skins/skin-black-light", media: "all" %>
     <script>
-        var root_url = '<%= cama_root_url(locale: nil) %>';
-        var root_admin_url = '<%= cama_admin_url(locale: nil) %>';
+        var root_url = '<%= cama_root_url %>';
+        var root_admin_url = '<%= cama_admin_url %>';
         var NO_IMAGE_URL = '<%= asset_url("camaleon_cms/image-not-found.png") %>';
         var CURRENT_LOCALE = '<%= current_locale %>';
         var ADMIN_TRANSLATIONS = <%= raw current_site.get_languages.to_json %>;
         var tinymce_global_settings = {language_url: "<%= asset_path("camaleon_cms/admin/tinymce/langs/#{current_locale}.js") %>", custom_css: [], custom_toolbar: [], post_render: [], init: [], setups: [], settings: []};
-        var I18n_data = <%= I18n.backend.respond_to?(:translations) ? I18n.backend.send(:translations)[current_locale.to_sym][:camaleon_cms][:admin][:js].to_json.html_safe : !!(I18n.backend.backends[1] && I18n.backend.backends[1].backends[1]) ? I18n.backend.backends[1].backends[1].send(:translations)[current_locale.to_sym][:camaleon_cms][:admin][:js].to_json.html_safe : "{}" rescue "{}" %>
+        var I18n_data = <%= I18n.backend.send(:translations)[current_locale.to_sym][:camaleon_cms][:admin][:js].to_json.html_safe rescue "{}" %>
     </script>
     <%= javascript_include_tag "camaleon_cms/admin/admin-manifest" %>
 
@@ -29,7 +30,7 @@
     <![endif]-->
     <%= render file: Rails.root.join('..', '..', 'spec/support/custom_admin') if Rails.env.test? %>
 </head>
-<body class="hold-transition skin-blue sidebar-mini" data-intro="<%= current_site.get_option("save_intro") %>">
+<body class="hold-transition skin-black-light sidebar-mini" data-intro="<%= current_site.get_option("save_intro") %>">
     <%= yield :before_content if content_for? :before_content %>
     <%= raw cama_content_before_draw %>
     <div class="wrapper">

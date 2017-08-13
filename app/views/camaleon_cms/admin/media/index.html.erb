@@ -1,11 +1,14 @@
 <div id="cama_media_gallery" data-url_actions="<%= actions_cama_admin_media_path(actions: @show_file_actions, dimension: params[:dimension]) %>" data-extra-params="<%= {versions: params[:versions], thumb_size: params[:thumb_size], formats: @media_formats.join(","), media_formats: @media_formats.join(","), dimension: params[:dimension], private: params[:private]}.to_json %>" data-versions="<%= params[:versions] %>" data-thumb_size="<%= params[:thumb_size] %>" data-formats="<%= @media_formats.join(",") %>" data-folder="<%= @folder %>" data-url="<%= ajax_cama_admin_media_path(actions: @show_file_actions) %>" data-dimension="<%= params[:dimension] %>">
-  <div class="panel panel-default">
-    <div class="panel-heading">
+  <div class="box box-primary">
+    <div class="box-header with-border">
       <div class="row">
         <div class="col-md-12">
           <div class="row">
               <div class="col-md-8">
-                  <ol style="margin-bottom: 0; padding-bottom: 0" class="breadcrumb media_folder_breadcrumb"></ol>
+                  <h3 class="box-title">
+                    Media 
+                    <ol style="margin: 10px 0 0 0;padding: 0 0 0 5px;text-align:left;" class="breadcrumb media_folder_breadcrumb"></ol>
+                  </h3>
               </div>
               <div class="col-md-4">
                   <%= form_tag '#', id: 'cama_search_form', class: 'input-group' do %>
@@ -29,35 +32,37 @@
         </div>
       </div>
     </div>
-    <div class="panel-body">
+    <div class="box-body">
       <div class="row" style="margin-bottom: 16px">
         <div class="col-md-9 media_browser_list" data-next-page="<%= @next_page %>">
           <%= render "files_list", files: @files, folders: @tree[:folders] %>
         </div>
 
         <div class="col-md-3 media_file_info_col">
-          <ul class="nav nav-tabs nav-justified" role="tablist">
-            <li role="presentation" class="active"><a href="#cama_media_upload" class="link_media_upload" role="tab" data-toggle="tab"><%= t("camaleon_cms.admin.button.upload_file") %></a></li>
-            <li role="presentation"><a href="#cama_media_info" class="link_media_info" role="tab" data-toggle="tab"><%= t("camaleon_cms.admin.media.info") %></a></li>
-          </ul>
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="cama_media_upload">
-                <div class="cama_media_fileuploader" data-input-id="cama-upload-files" data-url="<%= upload_cama_admin_media_path(actions: @show_file_actions, dimension: params[:dimension]) %>" data-dragDropStr="<%= t("camaleon_cms.admin.button.drag_drop") %>" data-uploadStr="<%= t("camaleon_cms.admin.button.upload_file") %>"><%= t("camaleon_cms.admin.button.upload_file") %></div>
-                <hr/>
-                <form id="cama_media_external">
-                    <fieldset>
-                        <legend><%= t("camaleon_cms.admin.media.external", default: 'From URL') %></legend>
-                        <div class="form-group">
-                            <input type="text" name="remote_file" class="form-control" placeholder="http://..." class="required">
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary"><%= t("camaleon_cms.admin.button.submit") %></button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="cama_media_info">
-              <div class="media_file_info"></div>
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active"><a href="#cama_media_upload" class="link_media_upload" role="tab" data-toggle="tab">Upload</a></li>
+              <li role="presentation"><a href="#cama_media_info" class="link_media_info" role="tab" data-toggle="tab">Detail</a></li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="cama_media_upload">
+                  <div class="cama_media_fileuploader" data-input-id="cama-upload-files" data-url="<%= upload_cama_admin_media_path(actions: @show_file_actions, dimension: params[:dimension]) %>" data-dragDropStr="<%= t("camaleon_cms.admin.button.drag_drop") %>" data-uploadStr="<%= t("camaleon_cms.admin.button.upload_file") %>"><%= t("camaleon_cms.admin.button.upload_file") %></div>
+                  <hr/>
+                  <form id="cama_media_external">
+                      <fieldset>
+                          <legend><%= t("camaleon_cms.admin.media.external", default: 'From URL') %></legend>
+                          <div class="form-group">
+                              <input type="text" name="remote_file" class="form-control" placeholder="http://..." class="required">
+                          </div>
+                          <div class="form-group">
+                              <button type="submit" class="btn btn-primary"><%= t("camaleon_cms.admin.button.submit") %></button>
+                          </div>
+                      </fieldset>
+                  </form>
+                </div>
+              <div role="tabpanel" class="tab-pane" id="cama_media_info">
+                <div class="media_file_info"></div>
+              </div>
             </div>
           </div>
         </div>

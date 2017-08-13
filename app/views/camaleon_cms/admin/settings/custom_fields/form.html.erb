@@ -8,11 +8,11 @@
     <div class="row">
         <%= form_for @field_group, as: "custom_field_group", url:{action: @field_group.new_record? ? :create : :update}, html: {class: 'validate-custom-field validate cama_ajax_request'} do |f| %>
             <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><%= t('camaleon_cms.admin.settings.details_custom_field_group') %></h3>
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><%= t('camaleon_cms.admin.settings.details_custom_field_group') %></h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="box-body">
                         <%= render partial: 'layouts/camaleon_cms/admin/form_error', locals: {data: @field_group} %>
                         <div class="form-group">
                             <%= f.label t('camaleon_cms.admin.table.name') %><br>
@@ -98,18 +98,18 @@
                             <div id="select_assign_group_help"></div>
                         </div>
                     </div>
-                    <div class="panel-footer">
+                    <div class="box-footer">
                         <a class="btn btn-default" role="back" href="<%= url_for action: :index %>"><%= t('camaleon_cms.admin.button.back') %></a>
                         <button class="btn btn-primary pull-right" type="submit"><%= t('camaleon_cms.admin.button.submit') %></button>
                     </div>
                 </div>
             </div>
             <div class="col-md-5">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><%= t('camaleon_cms.admin.settings.fields') %></h3>
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><%= t('camaleon_cms.admin.settings.fields') %></h3>
                     </div>
-                    <div class="panel-body padding-0">
+                    <div class="box-body padding-0">
                         <% fields =  @field_group.new_record? ? [] : @field_group.fields %>
                         <ul id="sortable-fields" class="clear list-unstyled">
                             <% fields.each do |field| @item_value = field; @item_options_value = field.options; @key = field.options[:field_key] %>
@@ -119,7 +119,7 @@
                             <% end  %>
                         </ul>
                     </div>
-                    <div class="panel-footer hidden">
+                    <div class="box-footer hidden">
                         <a class="btn btn-default" role="back" href="<%= url_for action: :index %>"><%= t('camaleon_cms.admin.button.back') %></a>
                         <button class="btn btn-primary pull-right" type="submit"><%= t('camaleon_cms.admin.button.submit') %></button>
                     </div>
@@ -127,11 +127,11 @@
             </div>
 
             <div class="col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title"><%= t('camaleon_cms.admin.settings.available_fields')%></h3>
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><%= t('camaleon_cms.admin.settings.available_fields')%></h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="box-body">
                         <div id="content-items-default" class="form-group input-group-sm">
                             <% cama_custom_field_elements.each do |i,item| %>
                                 <% next if item[:key] == "select_eval" %>
@@ -139,7 +139,7 @@
                             <% end %>
                         </div>
                     </div>
-                    <div class="panel-footer hidden">
+                    <div class="box-footer hidden">
                         <a class="btn btn-default" role="back" href="<%= url_for action: :index %>"><%= t('camaleon_cms.admin.button.back') %></a>
                         <button class="btn btn-primary pull-right" type="submit"><%= t('camaleon_cms.admin.button.submit') %></button>
                     </div>

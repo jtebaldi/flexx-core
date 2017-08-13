@@ -228,7 +228,7 @@ module CamaleonCms::UploaderHelper
     uploaded_io = File.open(uploaded_io) if uploaded_io.is_a?(String)
     return {error: "#{ct("file_format_error")} (#{args[:formats]})"} unless cama_uploader.class.validate_file_format(_tmp_name || uploaded_io.path, args[:formats])
     return {error: "#{ct("file_size_exceeded", default: "File size exceeded")} (#{number_to_human_size(args[:maximum])})"} if args[:maximum].present? && args[:maximum] < (uploaded_io.size rescue File.size(uploaded_io))
-    name = args[:name] || uploaded_io.try(:original_filename) || uploaded_io.path.split("/").last; name = "#{File.basename(name, File.extname(name)).underscore}#{File.extname(name)}"
+    name = args[:name] || uploaded_io.path.split("/").last; name = "#{File.basename(name, File.extname(name)).underscore}#{File.extname(name)}"
     path ||= uploader_verify_name(File.join(tmp_path, name))
     File.open(path, "wb"){|f| f.write(uploaded_io.read) } unless saved
     path = cama_resize_upload(path, args[:dimension]) if args[:dimension].present?
@@ -257,24 +257,21 @@ module CamaleonCms::UploaderHelper
         server: current_site.get_option("filesystem_type", "local").downcase,
         thumb: {w: thumb[0], h: thumb[1]},
         aws_settings: {
-          region: current_site.get_option("filesystem_region", 'us-west-2'),
-          access_key: current_site.get_option("filesystem_s3_access_key"),
-          secret_key: current_site.get_option("filesystem_s3_secret_key"),
-          bucket: current_site.get_option("filesystem_s3_bucket_name"),
-          cloud_front: current_site.get_option("filesystem_s3_cloudfront"),
+          region: ENV['S3_REGION'],
+          access_key: ENV['S3_ACCESS_KEY'],
+          secret_key: ENV['S3_SECRET_KEY'],
+          bucket: current_site.get_option("filesystem_s3_bucket_name", ENV['S3_BUCKET']),
+          cloud_front: current_site.get_option("filesystem_s3_cloudfront", ENV['CLOUDFRONT_URL']),
           aws_file_upload_settings: lambda{|settings| settings }, # permit to add your custom attributes for file_upload http://docs.aws.amazon.com/sdkforruby/api/Aws/S3/Object.html#upload_file-instance_method
           aws_file_read_settings: lambda{|data, s3_file| data } # permit to read custom attributes from aws file and add to file parsed object
-        },
-        custom_uploader: nil # posibility to use custom file uploader
+        }
       }
       hooks_run("on_uploader", args)
-      return args[:custom_uploader] if args[:custom_uploader].present?
-      
       case args[:server]
         when 's3', 'aws'
-          CamaleonCmsAwsUploader.new({current_site: current_site, thumb: args[:thumb], aws_settings: args[:aws_settings]}, self)
+          CamaleonCmsAwsUploader.new({current_site: current_site, thumb: args[:thumb], aws_settings: args[:aws_settings]})
         else
-          CamaleonCmsLocalUploader.new({current_site: current_site, thumb: args[:thumb]}, self)
+          CamaleonCmsLocalUploader.new({current_site: current_site, thumb: args[:thumb]})
       end
     }.call
   end

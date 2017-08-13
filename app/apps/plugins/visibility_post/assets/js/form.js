@@ -1,15 +1,22 @@
 jQuery(function($){
+    // $(".lnk_hide").html("DONE").addClass("btn btn-success");
     var panel = $("#panel-post-visibility");
     var link_edit = panel.find(".edit-visibility").click(function(){
         panel.find(".panel-options").removeClass("hidden").show().find('input[name="post_private_groups[]"]:first').addClass('required data-error-place-parent');
         link_edit.hide();
+        // $("#form-post").find(':submit').addClass("disabled").css("pointer-events","none");
         return false;
     });
     panel.find(".lnk_hide").click(function(){
         panel.find(".panel-options").hide().find('input[name="post_private_groups[]"]:first').removeClass('required');
         link_edit.show();
+        // $("#form-post").find(':submit').removeClass("disabled").css("pointer-events","initial");
         return false;
     });
+    
+    $("input[name='post[visibility]']:radio").change(function () {
+      
+    })
 
     panel.find("input[name='post[visibility]']").change(function(){
         var label = $(this).closest("label");

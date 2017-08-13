@@ -1,7 +1,7 @@
 <div class="page-content-wrap row">
   <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-heading ui-draggable-handle">
+    <div class="box box-primary">
+      <div class="box-header with-border ui-draggable-handle">
         <h4><%= t('camaleon_cms.admin.post_type.add_category')%> </h4>
       </div>
       <%= render partial: 'form' %>
@@ -9,19 +9,19 @@
   </div>
    <div class="col-md-8">
   <!-- START BASIC TABLE SAMPLE -->
-      <div class="panel panel-default">
-        <div class="panel-heading ui-draggable-handle">
+      <div class="box">
+        <div class="box-header with-border ui-draggable-handle">
             <h4>
-                <span class="fa fa-folder"></span> <%= "#{@post_type.decorate.the_title} / " if @post_type.present? %> <%= t('camaleon_cms.admin.post_type.categories', default: 'Categories') %>
+                <%= "#{@post_type.decorate.the_title} > " if @post_type.present? %> <%= t('camaleon_cms.admin.post_type.categories', default: 'Categories') %>
             </h4>
         </div>
-        <div class="panel-body">
-          <table class="table table-responsive table-hover table-striped">
+        <div class="box-body table-responsive">
+          <table class="table table-hover table-striped">
             <thead>
             <tr>
               <th><%= t('camaleon_cms.admin.table.name')%></th>
-              <th><%= t('camaleon_cms.admin.table.description')%></th>
-              <th><%= t('camaleon_cms.admin.table.slug')%></th>
+              <th class="hidden-xs"><%= t('camaleon_cms.admin.table.description')%></th>
+              <th class="hidden"><%= t('camaleon_cms.admin.table.slug')%></th>
               <th><%= t('camaleon_cms.admin.table.qty')%></th>
               <%= r = {html: "", post_type: @post_type}; hooks_run("category_list_header", r); raw(r[:html]); %>
               <th><%= t('camaleon_cms.admin.table.actions')%></th>
@@ -33,8 +33,8 @@
                     %>
                     <tr data-id="<%= item.id %>">
                       <td><%= raw('—' * pos) %> <%= item.the_title %></td>
-                      <td><%= item.the_content %></td>
-                      <td><%= item.the_slug %></td>
+                      <td class="hidden-xs"><%= item.the_content %></td>
+                      <td class="hidden"><%= item.the_slug %></td>
                       <td><%= item.count %></td>
                       <%= r = {html: "", post_type: @post_type, category: item}; hooks_run("category_list_body", r); raw(r[:html]); %>
                       <td>
