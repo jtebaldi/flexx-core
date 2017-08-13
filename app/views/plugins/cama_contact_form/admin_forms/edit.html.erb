@@ -27,12 +27,12 @@
             <div class="panel-body">
                 <div class="">
                     <div class="form-group">
-                        <%= f.label nil, "#{t('.name', default: 'Título')} <abbr title='required'>*</abbr>".html_safe, :class => ""  %><br>
+                        <%= f.label nil, "#{t('.name', default: 'Title')} <abbr title='required'>*</abbr>".html_safe, :class => ""  %><br>
                         <%= f.text_field :name, :class => "form-control required", style: "" %>
                     </div>
 
                     <div class="form-group">
-                        <%= f.label nil, "#{t('.slug', default: 'Código')} <abbr title=\"required\">*</abbr>".html_safe, :class => ""  %>
+                        <%= f.label nil, "#{t('.slug', default: 'Slug')} <abbr title=\"required\">*</abbr>".html_safe, :class => ""  %>
                         <%= f.text_field :slug, :class => "form-control slug required", "data-parent" => "plugins_contact_form_models_contact_form_name", style: "" %>
                     </div>
                     <div>
