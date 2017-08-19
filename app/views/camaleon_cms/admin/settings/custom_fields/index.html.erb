@@ -1,53 +1,46 @@
 <!-- PAGE CONTENT WRAPPER -->
-<div class="page-content-wrap">
-  <div class="row">
-    <div class="col-md-12">
-      <!-- START BASIC TABLE SAMPLE -->
-      <div class="box">
-        <div class="box-header">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 class="box-title"><span class="fa fa-cog"></span> <%= t('camaleon_cms.admin.settings.list_custom_fields_group') %> <%= @field_groups.count %></h4>
-                    <%= link_to raw("<i class='fa fa-plus'></i> #{t('camaleon_cms.admin.settings.add_field_group')}"), {action: :new}, class: "btn btn-primary pull-right cama_ajax_request" %>
-                </div>
-            </div>
-        </div>
-        <div class="box-body table-responsive">
+<div class="content-i">
+  <div class="content-box">
+    <div class="element-wrapper">
 
-          <table id="table_custom_groups" class="table table-hover table-striped">
-            <thead>
-            <tr>
-              <th><%= t('camaleon_cms.admin.table.id') %></th>
-              <th><%= t('camaleon_cms.admin.table.slug') %></th>
-              <th><%= t('camaleon_cms.admin.table.group_name') %></th>
-              <th><%= t('camaleon_cms.admin.table.description') %></th>
-              <th><%= t('camaleon_cms.admin.table.display_objects') %></th>
-              <th><%= t('camaleon_cms.admin.table.actions') %></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @field_groups.each do |f| %>
-                <tr data-id="<%= f.id %>">
-                  <td><%= f.id %></td>
-                  <td><%= f.slug %></td>
-                  <td><%= f.name %></td>
-                  <td><%= f.description %></td>
-                  <td><%= link_to(raw(f.get_caption), {action: :index, c: f.object_class, id: f.objectid}) %></td>
-                  <td>
-                    <%= link_to raw('<i class="fa fa-pencil"></i>'), {action: :edit, id: f.id }, class: "btn btn-default btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.edit')}" %>
-                    <%= link_to raw('<i class="fa fa-times"></i>'), { action: :destroy, id: f.id },
-                                method: :delete, data: { confirm: t('camaleon_cms.admin.message.delete_item') }, class: "btn btn-danger btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.delete')}" %>
-                  </td>
-                </tr>
-            <% end %>
+      <h5 class="box-title"><span class="fa fa-cog"></span> <%= t('camaleon_cms.admin.settings.list_custom_fields_group') %> <%= @field_groups.count %></h4>
+      <%= link_to raw("<i class='fa fa-plus'></i> #{t('camaleon_cms.admin.settings.add_field_group')}"), {action: :new}, class: "btn btn-primary pull-right cama_ajax_request" %>
+      
+      <div class="box-body table-responsive">
 
-            </tbody>
-          </table>
-          <%= content_tag("div", raw(t('camaleon_cms.admin.message.data_found_list')), class: "alert alert-warning") if @field_groups.empty? %>
-            <%= raw cama_do_pagination(@field_groups) %>
-        </div>
+        <table id="table_custom_groups" class="table table-hover table-striped">
+          <thead>
+          <tr>
+            <th><%= t('camaleon_cms.admin.table.id') %></th>
+            <th><%= t('camaleon_cms.admin.table.slug') %></th>
+            <th><%= t('camaleon_cms.admin.table.group_name') %></th>
+            <th><%= t('camaleon_cms.admin.table.description') %></th>
+            <th><%= t('camaleon_cms.admin.table.display_objects') %></th>
+            <th><%= t('camaleon_cms.admin.table.actions') %></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @field_groups.each do |f| %>
+              <tr data-id="<%= f.id %>">
+                <td><%= f.id %></td>
+                <td><%= f.slug %></td>
+                <td><%= f.name %></td>
+                <td><%= f.description %></td>
+                <td><%= link_to(raw(f.get_caption), {action: :index, c: f.object_class, id: f.objectid}) %></td>
+                <td>
+                  <%= link_to raw('<i class="fa fa-pencil"></i>'), {action: :edit, id: f.id }, class: "btn btn-default btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.edit')}" %>
+                  <%= link_to raw('<i class="fa fa-times"></i>'), { action: :destroy, id: f.id },
+                              method: :delete, data: { confirm: t('camaleon_cms.admin.message.delete_item') }, class: "btn btn-danger btn-xs cama_ajax_request", title: "#{t('camaleon_cms.admin.button.delete')}" %>
+                </td>
+              </tr>
+          <% end %>
+
+          </tbody>
+        </table>
+        <%= content_tag("div", raw(t('camaleon_cms.admin.message.data_found_list')), class: "alert alert-warning") if @field_groups.empty? %>
+          <%= raw cama_do_pagination(@field_groups) %>
       </div>
-      <!-- END BASIC TABLE SAMPLE -->
+    
     </div>
   </div>
 </div>

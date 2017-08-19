@@ -15,9 +15,19 @@
     </div>
     <div class="panel-body">
         <%= hidden_field_tag "fields[#{cid}][cid]", cid %>
+        <% if field[:field_type] == "twilio" %>
+            <div class="form-group ">
+                <label for="">Notify via:</label><br>
+                <%= select_tag "fields[#{cid}][t_option]", "<option>text</option>".html_safe, class: 'form-control translatable' %>
+            </div>
+        <% end %>
         <div class="form-group ">
-            <label for=""><%= t('.label') %></label><br>
-            <%= text_field_tag "fields[#{cid}][label]", field[:label], class: 'form-control translatable' %>
+            <% if field[:field_type] == "twilio" %>
+                <%= text_field_tag "fields[#{cid}][label]", "twilio", class: 'hidden form-control translatable' %>
+            <% else %>
+                <label for=""><%= t('.label') %></label><br>
+                <%= text_field_tag "fields[#{cid}][label]", field[:label], class: 'form-control translatable' %>
+            <% end %>
         </div>
         <% unless ['button', 'submit', 'reset_button'].include?(field[:field_type]) %>
             <div class="form-group ">
@@ -66,10 +76,14 @@
                     <label><%= t('.custom_class', default: 'Custom Class') %></label><br>
                     <%= text_field_tag "fields[#{cid}][field_options][field_class]", field[:field_options][:field_class], class: 'form-control' %>
                 </div>
-                <div class="form-group">
-                    <%= label_tag nil, t('.template', default: 'Template') %>
-                    <%= text_area_tag "fields[#{cid}][field_options][template]", field[:field_options][:template], class: 'form-control', rows: 6, placeholder: Plugins::CamaContactForm::CamaContactForm::field_template %>
-                </div>
+                <% if field[:field_type] == "twilio" %>
+                    <%= text_area_tag "fields[#{cid}][field_options][template]", "<div class='hidden'>[ci]</div>", class: 'form-control hidden' %>
+                <% else %>
+                    <div class="form-group">
+                        <%= label_tag nil, t('.template', default: 'Template') %>
+                        <%= text_area_tag "fields[#{cid}][field_options][template]", field[:field_options][:template], class: 'form-control', rows: 6, placeholder: Plugins::CamaContactForm::CamaContactForm::field_template %>
+                    </div>
+                <% end %>
                 <div class="form-group">
                     <%= label_tag nil, t('.attributes', default: 'Field Attributes') %>
                     <%= text_field_tag "fields[#{cid}][field_options][field_attributes]", field[:field_options][:field_attributes], class: 'form-control', placeholder: '{"style": "color: red;", "data-my-attr": "xx"}' %>
