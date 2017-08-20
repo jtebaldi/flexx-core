@@ -3,7 +3,7 @@ class CamaleonCms::HtmlMailer < ActionMailer::Base
   include CamaleonCms::HooksHelper
   include CamaleonCms::PluginsHelper
   #include ApplicationHelper
-  default from: "Camaleon CMS <owenperedo@gmail.com>"
+  default from: "RYNGER <ryngerco@gmail.com>"
   after_action :set_delivery_options
 
   # content='', from=nil, attachs=[], url_base='', current_site, template_name, layout_name, extra_data, format, cc_to
@@ -30,11 +30,18 @@ class CamaleonCms::HtmlMailer < ActionMailer::Base
     if @current_site.get_option("mailer_enabled") == 1
       mail_data[:delivery_method] = :smtp
       mail_data[:delivery_method_options] = {
-        user_name: @current_site.get_option("email_username"),
-        password: @current_site.get_option("email_pass"),
-        address: @current_site.get_option("email_server"),
-        port: @current_site.get_option("email_port"),
-        domain: (@current_site.the_url.to_s.parse_domain rescue "localhost"),
+        # user_name: @current_site.get_option("email_username"),
+        # password: @current_site.get_option("email_pass"),
+        # address: @current_site.get_option("email_server"),
+        # port: @current_site.get_option("email_port"),
+        # domain: (@current_site.the_url.to_s.parse_domain rescue "localhost"),
+        # authentication: "plain",
+        # enable_starttls_auto: true,
+        user_name: ENV['MAILGUN_UN'],
+        password: ENV['MAILGUN_PW'],
+        address: ENV['MAILGUN_ADDRESS'],
+        port: ENV['MAILGUN_PORT'],
+        domain: ENV['MAILGUN_DOMAIN'],
         authentication: "plain",
         enable_starttls_auto: true,
       }
@@ -62,7 +69,7 @@ class CamaleonCms::HtmlMailer < ActionMailer::Base
       if File.exist?(attach) && !File.directory?(attach)
         attachments["#{File.basename(attach)}"] = File.open(attach, 'rb') { |f| f.read }
       else
-        Rails.logger.error "Camaleon CMS - File attached in the email doesn't exist: #{attach}".cama_log_style(:red)
+        Rails.logger.error "CMS - File attached in the email doesn't exist: #{attach}".cama_log_style(:red)
       end
     }
 
