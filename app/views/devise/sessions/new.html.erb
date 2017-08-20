@@ -1,4 +1,5 @@
 <div class="login-box-body">
+    <%= render "camaleon_cms/flash_messages" %>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group has-feedback">
             <%= f.label :username %><br/>
