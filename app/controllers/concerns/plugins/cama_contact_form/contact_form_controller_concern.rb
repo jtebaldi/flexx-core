@@ -106,7 +106,9 @@ module Plugins::CamaContactForm::ContactFormControllerConcern
   private
   
   def send_message(opts, lead)
-    @client = Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_TOKEN'])
+    @twilio_sid = ENV['TWILIO_SID']
+    @twilio_token = ENV['TWILIO_TOKEN']
+    @client = Twilio::REST::Client.new(@twilio_sid, @twilio_token)
      
     to_phones = []
     to_phones << "+1" + current_site.get_field("twilio_default-number")
