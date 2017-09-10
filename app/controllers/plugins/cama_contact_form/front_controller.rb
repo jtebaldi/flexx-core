@@ -2,6 +2,7 @@ class Plugins::CamaContactForm::FrontController < CamaleonCms::Apps::PluginsFron
   include Plugins::CamaContactForm::MainHelper
   include Plugins::CamaContactForm::ContactFormControllerConcern
   skip_before_action :verify_authenticity_token
+  respond_to :html, :js
   
   # here add your custom functions
   def save_form

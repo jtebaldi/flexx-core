@@ -184,6 +184,9 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rake (11.2.2)
     request_store (1.3.2)
+    responders (2.4.0)
+      actionpack (>= 4.2.0, < 5.3)
+      railties (>= 4.2.0, < 5.3)
     rspec (3.5.0)
       rspec-core (~> 3.5.0)
       rspec-expectations (~> 3.5.0)
@@ -258,6 +261,7 @@ DEPENDENCIES
   poltergeist
   pry-rescue
   pry-stack_explorer
+  responders (~> 2.4)
   rspec (>= 2, < 4)
   rspec-instafail
   rspec-rails
