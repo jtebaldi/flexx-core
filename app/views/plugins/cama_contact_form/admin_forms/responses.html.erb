@@ -16,6 +16,7 @@
               <% @op_fields.each do |f| %>
                 <th scope="col"><%= f[:label].to_s.translate %></th>
               <% end %>
+              <th scope="col"><%= t('.campaign', default: 'Campaign') %></th>
               <th scope="col"><%= t('.created_at', default: 'Initial contact') %></th>
               <th scope="col"></th>
             </tr>
@@ -24,23 +25,24 @@
             <% @forms.each do |form| %>
                 <% value = (JSON.parse(form.settings).to_sym rescue form.value) %>
                 <tr>
-                <% @op_fields.each do |default| %>
-                    <% cid = default[:cid].to_sym %>
-                    <% if default[:field_type] == "file" %>
-                        <td data-label="<%= default[:label].to_s.translate %>"><%= link_to(value[:fields][cid], value[:fields][cid]) %></td>
-                    <% elsif default[:field_type] == "radio" || default[:field_type] == "checkboxes" %>
-                        <td data-label="<%= default[:label].to_s.translate %>"><%= value[:fields][cid].map { |f| f.to_s.translate }.join(', ') if value[:fields][cid].present? %></td>
-                    <% else %>
-                        <td data-label="<%= default[:label].to_s.translate %>"><%= value[:fields][cid] %></td>
-                    <% end %>
-                <% end %>
-                    <td data-label=""><%= value[:created_at] %></td>
-                    <td data-label="">
-                      <%= link_to raw('<span class="text-danger" style="color:#fff">Delete</span>'),
-                                  { action: :del_response, admin_form_id: @form.id, response_id: form.id },
-                                  method: :delete, data: { confirm: t('.actions.confirm_delete', default: 'Are you sure?') },
-                                  class: 'btn btn-danger btn-xs', title: t('.actions.delete', default: 'Delete') %>
-                    </td>
+                  <% @op_fields.each do |default| %>
+                      <% cid = default[:cid].to_sym %>
+                      <% if default[:field_type] == "file" %>
+                          <td data-label="<%= default[:label].to_s.translate %>"><%= link_to(value[:fields][cid], value[:fields][cid]) %></td>
+                      <% elsif default[:field_type] == "radio" || default[:field_type] == "checkboxes" %>
+                          <td data-label="<%= default[:label].to_s.translate %>"><%= value[:fields][cid].map { |f| f.to_s.translate }.join(', ') if value[:fields][cid].present? %></td>
+                      <% else %>
+                          <td data-label="<%= default[:label].to_s.translate %>"><%= value[:fields][cid] %></td>
+                      <% end %>
+                  <% end %>
+                  <td data-label=""><%= form.parent.campaign.name rescue '' %></td>
+                  <td data-label=""><%= value[:created_at] %></td>
+                  <td data-label="">
+                    <%= link_to raw('<span class="text-danger" style="color:#fff">Delete</span>'),
+                                { action: :del_response, admin_form_id: @form.id, response_id: form.id },
+                                method: :delete, data: { confirm: t('.actions.confirm_delete', default: 'Are you sure?') },
+                                class: 'btn btn-danger btn-xs', title: t('.actions.delete', default: 'Delete') %>
+                  </td>
                 </tr>
             <% end %>
             </tbody>
