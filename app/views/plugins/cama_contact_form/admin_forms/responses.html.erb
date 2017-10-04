@@ -37,7 +37,7 @@
                     <td data-label=""><%= value[:created_at] %></td>
                     <td data-label="">
                       <%= link_to raw('<span class="text-danger" style="color:#fff">Delete</span>'),
-                                  { action: :del_response, response_id: form.id },
+                                  { action: :del_response, admin_form_id: @form.id, response_id: form.id },
                                   method: :delete, data: { confirm: t('.actions.confirm_delete', default: 'Are you sure?') },
                                   class: 'btn btn-danger btn-xs', title: t('.actions.delete', default: 'Delete') %>
                     </td>
