@@ -32,7 +32,7 @@
                       <% elsif default[:field_type] == "radio" || default[:field_type] == "checkboxes" %>
                           <td data-label="<%= default[:label].to_s.translate %>"><%= value[:fields][cid].map { |f| f.to_s.translate }.join(', ') if value[:fields][cid].present? %></td>
                       <% else %>
-                          <td data-label="<%= default[:label].to_s.translate %>"><%= value[:fields][cid] %></td>
+                          <td data-label="<%= default[:label].to_s.translate %>"><%= value[:fields][cid] rescue '' %></td>
                       <% end %>
                   <% end %>
                   <td data-label=""><%= form.parent.campaign.name rescue '' %></td>
