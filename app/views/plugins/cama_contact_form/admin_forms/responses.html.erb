@@ -13,7 +13,7 @@
           <table class="table">
             <thead>
             <tr>
-              <% @op_fields.each do |f| %>
+              <% @op_fields.select{|f| ["name", "email"].include? f[:label].to_s.downcase }.each do |f| %>
                 <th scope="col"><%= f[:label].to_s.translate %></th>
               <% end %>
               <th scope="col"><%= t('.campaign', default: 'Campaign') %></th>
@@ -25,7 +25,7 @@
             <% @forms.each do |form| %>
                 <% value = (JSON.parse(form.settings).to_sym rescue form.value) %>
                 <tr>
-                  <% @op_fields.each do |default| %>
+                  <% @op_fields.select{|f| ["name", "email"].include? f[:label].to_s.downcase }.each do |default| %>
                       <% cid = default[:cid].to_sym %>
                       <% if default[:field_type] == "file" %>
                           <td data-label="<%= default[:label].to_s.translate %>"><%= link_to(value[:fields][cid], value[:fields][cid]) %></td>
@@ -38,6 +38,7 @@
                   <td data-label=""><%= form.parent.campaign.name rescue '' %></td>
                   <td data-label=""><%= value[:created_at] %></td>
                   <td data-label="">
+                    <%= link_to "view", { action: :show, id: form.id }, class: "btn btn-info btn-xs" %>
                     <%= link_to raw('<span class="text-danger" style="color:#fff">Delete</span>'),
                                 { action: :del_response, admin_form_id: @form.id, response_id: form.id },
                                 method: :delete, data: { confirm: t('.actions.confirm_delete', default: 'Are you sure?') },
