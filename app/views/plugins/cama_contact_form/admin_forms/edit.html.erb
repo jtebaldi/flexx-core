@@ -69,7 +69,7 @@
                 </div>
                 <div class="form-group">
                   <label for=""><%= t('.select_campaign', default: 'Select campaign') %></label><br/>
-                    <%= select_tag "railscf_campaign[campaign_id]", options_for_select(Campaign.all.collect {|a| [a.name, a.id]}, (@form.the_settings[:railscf_campaign][:campaign_id] rescue '')), class: 'form-control translatable', include_blank: true %>
+                    <%= select_tag "railscf_campaign[campaign_id]", options_for_select(current_site.campaigns.collect {|a| [a.name, a.id]}, (@form.the_settings[:railscf_campaign][:campaign_id] rescue '')), class: 'form-control translatable', include_blank: true %>
                 </div>
   
               </div>
