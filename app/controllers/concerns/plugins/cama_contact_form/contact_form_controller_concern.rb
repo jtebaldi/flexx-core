@@ -24,8 +24,10 @@ module Plugins::CamaContactForm::ContactFormControllerConcern
           fields[f[:cid].to_sym] = file_paths
         end
       end
-      new_settings = {"fields" => fields, "created_at" => Time.current.strftime("%Y-%m-%d %H:%M:%S").to_s}.to_json
-      form_new = current_site.contact_forms.new(name: "response-#{Time.now}", description: form.description, settings: new_settings, site_id: form.site_id, parent_id: form.id)
+      new_settings = {"fields" => fields, "created_at" => Time.current.strftime("%Y-%m-%d %H:%M:%S").to_s}
+      # check auto add to campaign
+      new_settings.merge!({"campaign_id" => form.the_settings[:railscf_campaign][:campaign_id]}) if form.the_settings[:railscf_campaign][:auto_add_to_campaign] == "true"
+      form_new = current_site.contact_forms.new(name: "response-#{Time.now}", description: form.description, settings: new_settings.to_json, site_id: form.site_id, parent_id: form.id)
       if form_new.save
         fields_data = convert_form_values(form, fields)
         message_body = form.the_settings[:railscf_mail][:body].to_s.translate.cama_replace_codes(fields)
