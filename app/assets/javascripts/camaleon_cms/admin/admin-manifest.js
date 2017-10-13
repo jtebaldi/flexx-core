@@ -44,6 +44,7 @@
 // tinymce
 //= require tinymce-jquery
 //= require ./tinymce/plugins/filemanager/plugin.min
+//= require ./tinymce/plugins/variable/plugin
 
 // post
 //= require ./_jquery.tagsinput.min
