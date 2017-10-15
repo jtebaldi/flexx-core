@@ -23,6 +23,7 @@ function cama_get_tinymce_settings(settings){
             contact_name: 'Contact Name',
             contact_email: 'Contact Email'
         },
+        variable_class: 'variable',
         language_url: tinymce_global_settings["language_url"],
         file_browser_callback: function(field_name, url, type, win) {
             $.fn.upload_filemanager({
