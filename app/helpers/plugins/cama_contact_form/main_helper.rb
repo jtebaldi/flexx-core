@@ -68,10 +68,18 @@ module Plugins::CamaContactForm::MainHelper
 
   def contact_form_admin_before_load
     admin_menu_append_menu_item("settings", {icon: "envelope-o", title: t('plugins.cama_contact_form.title', default: 'Contact Form'), url: admin_plugins_cama_contact_form_admin_forms_path, datas: "data-intro='This plugin permit you to create you contact forms with desired fields and paste your short_code in any content.' data-position='right'"})
-    admin_menu_insert_menu_after("dashboard", "leads", {icon: "podcast", title: t('plugins.cama_contact_form.title', default: 'Leads'), url: admin_plugins_cama_contact_form_leads_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
-    admin_menu_insert_menu_after("leads", "campaigns", {icon: "check", title: t('plugins.cama_contact_form.title', default: 'Campaigns'), url: admin_plugins_cama_contact_form_admin_campaigns_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
-    admin_menu_insert_menu_after("campaigns", "goals", {icon: "bullseye", title: t('plugins.cama_contact_form.title', default: 'Goals'), url: admin_plugins_cama_contact_form_admin_goals_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
-    admin_menu_insert_menu_after("goals", "templates", {icon: "copy", title: t('plugins.cama_contact_form.title', default: 'Templates'), url: admin_plugins_cama_contact_form_admin_templates_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
+    if can? :manage, :leads
+      admin_menu_insert_menu_after("dashboard", "leads", {icon: "podcast", title: t('plugins.cama_contact_form.title', default: 'Leads'), url: admin_plugins_cama_contact_form_leads_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
+    end
+    if can? :manage, :campaigns
+      admin_menu_insert_menu_after("leads", "campaigns", {icon: "check", title: t('plugins.cama_contact_form.title', default: 'Campaigns'), url: admin_plugins_cama_contact_form_admin_campaigns_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
+    end
+    if can? :manage, :goals
+      admin_menu_insert_menu_after("campaigns", "goals", {icon: "bullseye", title: t('plugins.cama_contact_form.title', default: 'Goals'), url: admin_plugins_cama_contact_form_admin_goals_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
+    end
+    if can? :manage, :templates
+      admin_menu_insert_menu_after("goals", "templates", {icon: "copy", title: t('plugins.cama_contact_form.title', default: 'Templates'), url: admin_plugins_cama_contact_form_admin_templates_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
+    end
   end
 
   def contact_form_app_before_load

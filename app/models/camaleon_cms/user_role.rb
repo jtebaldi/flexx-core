@@ -126,6 +126,26 @@ class CamaleonCms::UserRole < CamaleonCms::TermTaxonomy
               key: 'theme_settings',
               label: "#{I18n.t('camaleon_cms.admin.settings.theme_setting', default: 'Theme Settings')}",
               description: "#{I18n.t('camaleon_cms.admin.users.tool_tip.themes')}"
+          },
+          {
+              key: 'leads',
+              label: "#{I18n.t('camaleon_cms.admin.settings.leads', default: 'Leads')}",
+              description: "#{I18n.t('camaleon_cms.admin.users.tool_tip.leads')}"
+          },
+          {
+              key: 'campaigns',
+              label: "#{I18n.t('camaleon_cms.admin.settings.campaigns', default: 'Campaigns')}",
+              description: "#{I18n.t('camaleon_cms.admin.users.tool_tip.leads')}"
+          },
+          {
+              key: 'goals',
+              label: "#{I18n.t('camaleon_cms.admin.settings.goals', default: 'Goals')}",
+              description: "#{I18n.t('camaleon_cms.admin.users.tool_tip.goals')}"
+          },
+          {
+              key: 'templates',
+              label: "#{I18n.t('camaleon_cms.admin.settings.themplates', default: 'Templates')}",
+              description: "#{I18n.t('camaleon_cms.admin.users.tool_tip.templates')}"
           }
       ]
   }
