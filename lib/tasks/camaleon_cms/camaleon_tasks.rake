@@ -19,7 +19,6 @@ namespace :camaleon_cms do
   desc "Update admin roles"
   task update_admin_roles: :environment do
     admin_role = CamaleonCms::Meta.where(object_class: "UserRole", key: "_manager_1").first
-    # admin_role.value = '{"media":1,"comments":1,"themes":1,"widgets":1,"nav_menu":1,"plugins":1,"users":1,"settings":1,"theme_settings":1, "leads":1, "campaigns":0, "goals":0, "templates":0}'
     admin_role.value = {
       media: 1,
       comments: 1,
@@ -32,7 +31,6 @@ namespace :camaleon_cms do
       theme_settings: 1,
       leads: 1,
       campaigns: 1,
-      goals: 1,
       templates: 1
     }.to_json
     admin_role.save
