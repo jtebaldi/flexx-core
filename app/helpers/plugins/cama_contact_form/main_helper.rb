@@ -74,9 +74,6 @@ module Plugins::CamaContactForm::MainHelper
     if can? :manage, :campaigns
       admin_menu_insert_menu_after("leads", "campaigns", {icon: "check", title: t('plugins.cama_contact_form.title', default: 'Campaigns'), url: admin_plugins_cama_contact_form_admin_campaigns_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
     end
-    if can? :manage, :goals
-      admin_menu_insert_menu_after("campaigns", "goals", {icon: "bullseye", title: t('plugins.cama_contact_form.title', default: 'Goals'), url: admin_plugins_cama_contact_form_admin_goals_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
-    end
     if can? :manage, :templates
       admin_menu_insert_menu_after("goals", "templates", {icon: "copy", title: t('plugins.cama_contact_form.title', default: 'Templates'), url: admin_plugins_cama_contact_form_admin_templates_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
     end
