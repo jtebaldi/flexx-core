@@ -18,10 +18,15 @@ function cama_get_tinymce_settings(settings){
         relative_urls: false,
         remove_script_host: false,
         browser_spellcheck : true,
-        variable_valid: ["contact_name", "contact_email"],
+        variable_valid: ["contact_name", "contact_email", "site_email", "site_phone", "site_address", "site_logo_dark", "site_logo_light"],
         variable_mapper: {
             contact_name: 'Contact Name',
-            contact_email: 'Contact Email'
+            contact_email: 'Contact Email',
+            site_email: 'Site Email',
+            site_phone: 'Site Phone',
+            site_address: 'Site Address',
+            site_logo_dark: 'Site Logo Dark',
+            site_logo_light: 'Site Logo Light'
         },
         variable_class: 'variable',
         language_url: tinymce_global_settings["language_url"],
@@ -38,15 +43,42 @@ function cama_get_tinymce_settings(settings){
               type: 'menubutton',
               text: 'Contact Form',
               icon: false,
-              menu: [{
+              menu: [
+              {
                 text: 'Contact Name',
                 onclick: function() {
                   editor.plugins.variable.addVariable('contact_name');
                 }
-              }, {
+              }, 
+              {
                 text: 'Contact Email',
                 onclick: function() {
                   editor.plugins.variable.addVariable('contact_email');
+                }
+              }, {
+                text: 'Site Email',
+                onclick: function() {
+                  editor.plugins.variable.addVariable('site_email');
+                }
+              }, {
+                text: 'Site Phone',
+                onclick: function() {
+                  editor.plugins.variable.addVariable('site_phone');
+                }
+              }, {
+                text: 'Site Address',
+                onclick: function() {
+                  editor.plugins.variable.addVariable('site_address');
+                }
+              }, {
+                text: 'Site Logo Dark',
+                onclick: function() {
+                  editor.plugins.variable.addVariable('site_logo_dark');
+                }
+              }, {
+                text: 'Site Logo Light',
+                onclick: function() {
+                  editor.plugins.variable.addVariable('site_logo_light');
                 }
               }]
             });
