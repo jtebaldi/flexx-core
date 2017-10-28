@@ -1,4 +1,11 @@
 module Plugins::CamaContactForm::MainHelper
+  def sortable(column, title = nil)
+    title ||= column.titleize
+    css_class = column == sort_column ? "current #{sort_direction}" : nil
+    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+    link_to title, {:sort => column, :direction => direction}, {:class => css_class}
+  end
+
   def link_to_add_fields(name, f, association)
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
@@ -17,7 +24,7 @@ module Plugins::CamaContactForm::MainHelper
   end
 
   def add_nested_javascript
-    append_asset_libraries({"cama_contact_form"=> { js: [plugin_asset_path("campaigns.js")] }})
+    append_asset_libraries({"cama_contact_form"=> { js: [plugin_asset_path("campaigns.js")], css: [plugin_asset_path("styles.css")] }})
   end
 
   def contact_form_on_import(args)
