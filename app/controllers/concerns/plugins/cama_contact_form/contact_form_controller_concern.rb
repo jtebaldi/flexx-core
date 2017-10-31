@@ -31,7 +31,7 @@ module Plugins::CamaContactForm::ContactFormControllerConcern
         fields_data = convert_form_values(form, fields)
         message_body = form.the_settings[:railscf_mail][:body].to_s.translate.cama_replace_codes(fields)
         content = render_to_string(partial: plugin_view('contact_form/email_content'), layout: false, formats: ['html'], locals: {file_attachments: attachments, fields: fields_data, values: fields, message_body: message_body, form: form})
-        # cama_send_email(form.the_settings[:railscf_mail][:to], form.the_settings[:railscf_mail][:subject].to_s.translate.cama_replace_codes(fields), {attachments: attachments, content: content, extra_data: {fields: fields_data}})
+        cama_send_email(form.the_settings[:railscf_mail][:to], form.the_settings[:railscf_mail][:subject].to_s.translate.cama_replace_codes(fields), {attachments: attachments, content: content, extra_data: {fields: fields_data}})
 
         if fields_data.has_key?("twilio")
             opts = fields_data.fetch("twilio").first
@@ -43,7 +43,7 @@ module Plugins::CamaContactForm::ContactFormControllerConcern
         args = {form: form, values: fields}; hooks_run("contact_form_after_submit", args)
         if form.the_settings[:railscf_mail][:to_answer].present? && (answer_to = fields[form.the_settings[:railscf_mail][:to_answer].gsub(/(\[|\])/, '').to_sym]).present?
           content = form.the_settings[:railscf_mail][:body_answer].to_s.translate.cama_replace_codes(fields)
-          # cama_send_email(answer_to, form.the_settings[:railscf_mail][:subject_answer].to_s.translate.cama_replace_codes(fields), {content: content})
+          cama_send_email(answer_to, form.the_settings[:railscf_mail][:subject_answer].to_s.translate.cama_replace_codes(fields), {content: content})
         end
       else
         errors << form.the_message('mail_sent_ng', t('.error_form_val', default: 'An error occurred, please try again.'))
