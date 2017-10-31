@@ -54,26 +54,26 @@
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><%= t('.form_campaign_settings', default: 'Campaign Settings') %></h3>
-                <ul class="panel-controls">
-                    <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
-                </ul>
-            </div>
-            <div class="panel-body">
-              <div class="">
-                <div class="form-group">
-                  <%= hidden_field_tag "railscf_campaign[auto_add_to_campaign]", false %>
-                  <%= check_box_tag "railscf_campaign[auto_add_to_campaign]", true, (@form.the_settings[:railscf_campaign][:auto_add_to_campaign] == "true" rescue ''), id: "railscf_campaign_auto_add_to_campaign_check" %>
-                  <label for="railscf_campaign_auto_add_to_campaign_check"><%= t('.auto_add_to_campaign', default: 'Automatically add to campaign?') %></label>
-                </div>
-                <div class="form-group">
-                  <label for="railscf_campaign_campaign_id"><%= t('.select_campaign', default: 'Select campaign') %></label><br/>
-                    <%= select_tag "railscf_campaign[campaign_id]", options_for_select(current_site.campaigns.collect {|a| [a.name, a.id]}, (@form.the_settings[:railscf_campaign][:campaign_id] rescue '')), class: 'form-control translatable', include_blank: true %>
-                </div>
-  
+          <div class="panel-heading">
+              <h3 class="panel-title"><%= t('.form_campaign_settings', default: 'Campaign Settings') %></h3>
+              <ul class="panel-controls">
+                  <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+              </ul>
+          </div>
+          <div class="panel-body">
+            <div class="">
+              <div class="form-group">
+                <%= hidden_field_tag "railscf_campaign[auto_add_to_campaign]", false %>
+                <%= check_box_tag "railscf_campaign[auto_add_to_campaign]", true, (@form.the_settings[:railscf_campaign][:auto_add_to_campaign] == "true" rescue ''), id: "railscf_campaign_auto_add_to_campaign_check" %>
+                <label for="railscf_campaign_auto_add_to_campaign_check"><%= t('.auto_add_to_campaign', default: 'Automatically add to campaign?') %></label>
               </div>
+              <div class="form-group">
+                <label for="railscf_campaign_campaign_id"><%= t('.select_campaign', default: 'Select campaign') %></label><br/>
+                  <%= select_tag "railscf_campaign[campaign_id]", options_for_select(current_site.campaigns.collect {|a| [a.name, a.id]}, (@form.the_settings[:railscf_campaign][:campaign_id] rescue '')), class: 'form-control translatable', include_blank: true %>
+              </div>
+
             </div>
+          </div>
         </div>
 
         <div class="panel panel-default">
@@ -170,6 +170,28 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title"><%= t('.form_redirect_settings', default: 'Redirect Settings') %></h3>
+              <ul class="panel-controls">
+                  <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+              </ul>
+          </div>
+          <div class="panel-body">
+            <div class="">
+              <div class="form-group">
+                <%= hidden_field_tag "railscf_campaign[redirected]", false %>
+                <%= check_box_tag "railscf_campaign[redirected]", true, (@form.the_settings[:railscf_campaign][:redirected] == "true" rescue ''), id: "railscf_campaign_redirected_check" %>
+                <label for="railscf_campaign_redirected_check"><%= t('.redirected', default: 'Automatically redirect?') %></label>
+              </div>
+              <div class="form-group">
+                <label><%= t('.to', default: 'Redirect To') %>:</label><br>
+                <input class="form-control" type="text" name="railscf_campaign[redirect_to]" value="<%= @form.the_settings[:railscf_campaign][:redirect_to] rescue '' %>" placeholder="https://www.google.com" />
+              </div>
+
+            </div>
+          </div>
         </div>
     </div>
     <div class="col-md-5">

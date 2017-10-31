@@ -8,7 +8,7 @@
 %>
     <section>
         <%= raw r[:before_form] %>
-        <%= form_for @form, url: plugins_cama_contact_form_save_form_path, html: {method: "post", class: r[:form_class], multipart: true, remote: true} do |f| %>
+        <%= form_for @form, url: plugins_cama_contact_form_save_form_path, html: {method: "post", class: r[:form_class], multipart: true} do |f| %>
             <%= hidden_field_tag "id", @form.id %>
             <%= render :partial => "camaleon_cms/flash_messages", locals:{ flash: (flash[:contact_form] || {}).with_indifferent_access } %>
             <%= raw cama_form_element_bootstrap_object(r[:form], values[:fields], values_fields) %>
