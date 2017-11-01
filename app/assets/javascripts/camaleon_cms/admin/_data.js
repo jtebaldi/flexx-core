@@ -18,15 +18,14 @@ function cama_get_tinymce_settings(settings){
         relative_urls: false,
         remove_script_host: false,
         browser_spellcheck : true,
-        variable_valid: ["contact_name", "contact_email", "site_email", "site_phone", "site_address", "site_logo_dark", "site_logo_light"],
+        variable_valid: ["contact_name", "contact_email", "site_email", "site_phone", "site_address", "site_logo"],
         variable_mapper: {
             contact_name: 'Contact Name',
             contact_email: 'Contact Email',
             site_email: 'Site Email',
             site_phone: 'Site Phone',
             site_address: 'Site Address',
-            site_logo_dark: 'Site Logo Dark',
-            site_logo_light: 'Site Logo Light'
+            site_logo: 'Site Logo',
         },
         variable_class: 'variable',
         language_url: tinymce_global_settings["language_url"],
@@ -71,14 +70,9 @@ function cama_get_tinymce_settings(settings){
                   editor.plugins.variable.addVariable('site_address');
                 }
               }, {
-                text: 'Site Logo Dark',
+                text: 'Site Logo',
                 onclick: function() {
-                  editor.plugins.variable.addVariable('site_logo_dark');
-                }
-              }, {
-                text: 'Site Logo Light',
-                onclick: function() {
-                  editor.plugins.variable.addVariable('site_logo_light');
+                  editor.plugins.variable.addVariable('site_logo');
                 }
               }]
             });
