@@ -6,6 +6,20 @@ module Plugins::CamaContactForm::MainHelper
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
 
+  def contact_name(contact_form, value)
+    begin
+      if contact_form.parent.fields.select{|f| f[:label].to_s.downcase == "name"}.first.present?
+        return value[:fields][contact_form.parent.fields.select{|f| f[:label].to_s.downcase == "name"}.first[:cid].to_sym]
+      else
+        first_name = value[:fields][contact_form.parent.fields.select{|f| f[:label].to_s.downcase.gsub(" ", "_") == "first_name"}.first[:cid].to_sym]
+        last_name = value[:fields][contact_form.parent.fields.select{|f| f[:label].to_s.downcase.gsub(" ", "_") == "last_name"}.first[:cid].to_sym]
+        return first_name + " " + last_name
+      end
+    rescue
+      ""
+    end
+  end
+
   def link_to_add_fields(name, f, association)
     new_object = f.object.send(association).klass.new
     id = new_object.object_id
@@ -75,13 +89,13 @@ module Plugins::CamaContactForm::MainHelper
 
   def contact_form_admin_before_load
     admin_menu_append_menu_item("settings", {icon: "envelope-o", title: t('plugins.cama_contact_form.title', default: 'Contact Form'), url: admin_plugins_cama_contact_form_admin_forms_path, datas: "data-intro='This plugin permit you to create you contact forms with desired fields and paste your short_code in any content.' data-position='right'"})
-    if can? :manage, :leads
+    if can?(:manage, :leads)
       admin_menu_insert_menu_after("dashboard", "leads", {icon: "podcast", title: t('plugins.cama_contact_form.title', default: 'Leads'), url: admin_plugins_cama_contact_form_leads_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
     end
-    if can? :manage, :campaigns
+    if can?(:manage, :campaigns)
       admin_menu_insert_menu_after("leads", "campaigns", {icon: "check", title: t('plugins.cama_contact_form.title', default: 'Campaigns'), url: admin_plugins_cama_contact_form_admin_campaigns_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
     end
-    if can? :manage, :templates
+    if can?(:manage, :templates)
       admin_menu_insert_menu_after("campaigns", "templates", {icon: "copy", title: t('plugins.cama_contact_form.title', default: 'Templates'), url: admin_plugins_cama_contact_form_admin_templates_path, datas: "data-intro='Show all leads from contact forms' data-position='right'"})
     end
   end
