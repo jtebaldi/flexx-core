@@ -18,10 +18,11 @@ function cama_get_tinymce_settings(settings){
         relative_urls: false,
         remove_script_host: false,
         browser_spellcheck : true,
-        variable_valid: ["contact_name", "contact_email", "site_email", "site_phone", "site_address", "site_logo"],
+        variable_valid: ["contact_name", "contact_email", "site_name", "site_email", "site_phone", "site_address", "site_logo"],
         variable_mapper: {
             contact_name: 'Contact Name',
             contact_email: 'Contact Email',
+            site_name: 'Site Name',
             site_email: 'Site Email',
             site_phone: 'Site Phone',
             site_address: 'Site Address',
@@ -53,6 +54,11 @@ function cama_get_tinymce_settings(settings){
                 text: 'Contact Email',
                 onclick: function() {
                   editor.plugins.variable.addVariable('contact_email');
+                }
+              }, {
+                text: 'Site Name',
+                onclick: function() {
+                  editor.plugins.variable.addVariable('site_name');
                 }
               }, {
                 text: 'Site Email',
