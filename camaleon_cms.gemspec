@@ -43,6 +43,7 @@ Gem::Specification.new do |s|
 
   # MEDIA MANAGER
   s.add_dependency 'aws-sdk', '~> 2'
+  s.add_dependency 'cloudinary', '~> 1.8.2'
 
   # development dependencies
   s.add_development_dependency 'rspec', '>= 2', '< 4'
