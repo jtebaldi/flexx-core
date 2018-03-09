@@ -7,8 +7,8 @@
     <title><%= raw cama_admin_title_draw %></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <%= stylesheet_link_tag "rynger_cms/admin/admin-manifest", media: "all" %>
-    
+    <%= stylesheet_link_tag "camaleon_cms/admin/admin-manifest", media: "all" %>
+    <%= stylesheet_link_tag "camaleon_cms/admin/lte/skins/skin-black-light", media: "all" %>
     <script>
         var root_url = '<%= cama_root_url %>';
         var root_admin_url = '<%= cama_admin_url %>';
@@ -29,36 +29,36 @@
     <![endif]-->
     <%= render file: Rails.root.join('..', '..', 'spec/support/custom_admin') if Rails.env.test? %>
 </head>
-<body data-intro="<%= current_site.get_option("save_intro") %>">
+<body class="hold-transition skin-black-light sidebar-mini" data-intro="<%= current_site.get_option("save_intro") %>">
     <%= yield :before_content if content_for? :before_content %>
     <%= raw cama_content_before_draw %>
     <div class="all-wrapper menu-side">
       <div class="layout-w">
-        
+
         <%= render partial: "layouts/camaleon_cms/admin/mobile_menu", locals: {_admin_mobile_menu_draw: _admin_mobile_menu_draw} %>
-        
+
         <%= render partial: "layouts/camaleon_cms/admin/menu_side", locals: {_admin_menu_draw: _admin_menu_draw} %>
-        
-        
+
+
         <div class="content-w">
             <!-- Main content -->
             <section class="content" id="admin_content">
                 <%= render partial: "layouts/camaleon_cms/admin/top_menu_secondary" %>
                 <ol class="breadcrumb"><%= render_breadcrumbs :tag => :li, :separator => "" %></ol>
-                
+
                 <div class="content-i">
                   <div class="content-box">
                     <%= render "camaleon_cms/flash_messages" %>
-                  
-                    <%= yield %>  
+
+                    <%= yield %>
                   </div>
-                  
+
                 </div>
-                
+
             </section>
             <!-- /.content -->
         </div>
-      
+
       </div>
       <div class="display-type"></div>
     </div>
