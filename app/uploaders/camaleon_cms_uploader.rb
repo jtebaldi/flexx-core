@@ -25,16 +25,16 @@ class CamaleonCmsUploader
     prefix = "/#{prefix}" unless prefix.starts_with?('/')
     db = @current_site.get_meta(cache_key, nil) || browser_files
     res = db[prefix] || {files: {}, folders: {}}
-    
+
     # Private hook to recover custom files to include in current list where data can be modified to add custom{files, folders}
     # Note: this hooks doesn't have access to public vars like params. requests, ...
     if @instance
       args={data: res, prefix: prefix}; @instance.hooks_run('uploader_list_objects', args)
       res = args[:data]
     end
-    
-    res[:files] = res[:files].sort_by{|k, v| v[sort] }.reverse.to_h
-    res[:folders] = res[:folders].sort_by{|k, v| v['name'] }.reverse.to_h
+
+    res[:files] = res[:files].sort_by{|k, v| v['name'] }.to_h
+    res[:folders] = res[:folders].sort_by{|k, v| v['name'].downcase }.to_h
     res
   end
 
