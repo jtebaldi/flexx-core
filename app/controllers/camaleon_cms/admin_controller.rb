@@ -15,7 +15,8 @@ class CamaleonCms::AdminController < CamaleonCms::CamaleonController
 
   # render admin dashboard
   def index
-    render "dashboard"
+    r = {layout: nil, render: "dashboard"}; hooks_run("on_render_admin_dashboard", r)
+    render r[:render], (!r[:layout].nil? ? {layout: r[:layout]} : {})
   end
 
   # ajax requests for admin panel
