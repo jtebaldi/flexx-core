@@ -310,11 +310,11 @@ ol.breadcrumb {
   font-size: 12px;
   margin-bottom: 15px;
   color: #777;
-  
+
   a {
     color: black;
   }
-  
+
   & li + li:before {
     content: ">";
   }
@@ -396,11 +396,11 @@ ol.breadcrumb {
 // Box tools
 .box-tools a {
   color: #444;}
-  
+
 .btn-box-action {
   background-color: transparent;
   font-size: 15px;
-  
+
   i {
     font-size: 13px;}
 }
@@ -421,16 +421,16 @@ ol.breadcrumb {
 
 #main-header {
   border-bottom: 1px solid #d2d6de;
-  
+
   & .logo {
     border-right: none;
     padding: 0 5px 15px;
-    
+
     & img {
       max-height: 90%;
     }
   }
-  
+
   & .navbar > .sidebar-toggle {
     border-left: 1px solid #d2d6de;
     border-right: none;
@@ -452,26 +452,26 @@ ol.breadcrumb {
 }
 
 
-// Mobile view 
+// Mobile view
 @media (max-width: 767px) {
   // Login screen
   .login-box,
   .register-box {
     width: auto;
   }
-  
+
   // Hide breadcrumb on mobile
   ol.breadcrumb {
     display: none;
   }
-  
+
   // Override bg color behind logo
   .skin-black-light .main-header > .logo {
-    background-color: #ccc !important;  
+    background-color: #ccc !important;
   }
-  
+
   // Make sidebar full screen width
-  .sidebar-open #sidebar-menu { 
+  .sidebar-open #sidebar-menu {
     width: 100% !important;
   }
   .sidebar-open .content-wrapper,
@@ -482,7 +482,7 @@ ol.breadcrumb {
     -o-transform: translate(100%);
     transform: translate(100%);
   }
-  
+
   // Enlarge sidebar menu links and sub-links
   .sidebar-menu > li > a {
     padding: 20px;
@@ -495,17 +495,17 @@ ol.breadcrumb {
   }
   .treeview-menu {
     padding-left: 0 !important;
-    
+
     & > .xn-openable > .treeview-menu {
       background-color: #fff;
-      
+
       & > li > a {
         border-bottom: 1px solid #eee;
         &:hover { color: #000; }
       }
     }
   }
-  
+
   // User menu dropdown
   .navbar-nav > .user-menu > .dropdown-menu {
     width: 100%;

@@ -2,7 +2,7 @@ module CamaleonCms::Admin::MenusHelper
   include CamaleonCms::Admin::BreadcrumbHelper
 
   def admin_menus_add_commons
-    admin_menu_add_menu("dashboard", {icon: "dashboard", title: t('camaleon_cms.admin.sidebar.dashboard'), url: cama_admin_dashboard_path})
+    admin_menu_add_menu("dashboard", {icon: "window-content", title: t('camaleon_cms.admin.sidebar.dashboard'), url: cama_admin_dashboard_path})
     items = []
 
     current_site.post_types.eager_load(:metas).visible_menu.all.each do |pt|
@@ -18,28 +18,28 @@ module CamaleonCms::Admin::MenusHelper
       end
       items << {icon: pt.get_option('icon', "copy"), title: pt.the_title, url: "", items: items_i } if items_i.present? #if can? :posts, pt
     end
-    admin_menu_add_menu("content", {icon: "database", title: t('camaleon_cms.admin.sidebar.contents'), url: "", items: items, datas: "data-intro='#{t("camaleon_cms.admin.intro.content")}' data-position='right' data-wait='600'"}) if items.present?
+    admin_menu_add_menu("content", {icon: "pencil-12", title: t('camaleon_cms.admin.sidebar.contents'), url: "", items: items, datas: "data-intro='#{t("camaleon_cms.admin.intro.content")}' data-position='right' data-wait='600'"}) if items.present?
     #end
 
-    admin_menu_add_menu("media", {icon: "picture-o", title: t('camaleon_cms.admin.sidebar.media'), url: cama_admin_media_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.media")}' data-position='right'"}) if can? :manage, :media
-    admin_menu_add_menu("comments", {icon: "comments", title: t('camaleon_cms.admin.sidebar.comments'), url: cama_admin_comments_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.comments")}' data-position='right'"}) if can? :manage, :comments
+    admin_menu_add_menu("media", {icon: "documents-07", title: t('camaleon_cms.admin.sidebar.media'), url: cama_admin_media_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.media")}' data-position='right'"}) if can? :manage, :media
+    admin_menu_add_menu("comments", {icon: "phone-21", title: t('camaleon_cms.admin.sidebar.comments'), url: cama_admin_comments_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.comments")}' data-position='right'"}) if can? :manage, :comments
 
     items = []
     items << {icon: "desktop", title: t('camaleon_cms.admin.sidebar.themes'), url: cama_admin_appearances_themes_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.themes")}' data-position='right'"} if can? :manage, :themes
     items << {icon: "archive", title: t('camaleon_cms.admin.sidebar.widgets'), url: cama_admin_appearances_widgets_main_index_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.widgets")}' data-position='right'"} if can? :manage, :widgets
     items << {icon: "list", title: t('camaleon_cms.admin.sidebar.menus'), url: cama_admin_appearances_nav_menus_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.menus", image: view_context.asset_path("camaleon_cms/admin/intro/menus.png"))}' data-position='right'"} if can? :manage, :nav_menu
     items << {icon: "code", title: t('camaleon_cms.admin.sidebar.shortcodes', default: "Shortcodes"), url: cama_admin_settings_shortcodes_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.shortcodes")}' data-position='right'"} if can? :manage, :shortcodes
-    admin_menu_add_menu("appearance", {icon: "paint-brush", title: t('camaleon_cms.admin.sidebar.appearance'), url: "", items: items, datas: "data-intro='#{t("camaleon_cms.admin.intro.appearance")}' data-position='right' data-wait='500'"}) if items.present?
+    admin_menu_add_menu("appearance", {icon: "ui-55", title: t('camaleon_cms.admin.sidebar.appearance'), url: "", items: items, datas: "data-intro='#{t("camaleon_cms.admin.intro.appearance")}' data-position='right' data-wait='500'"}) if items.present?
 
 
-    admin_menu_add_menu("plugins", {icon: "plug", title: "#{t('camaleon_cms.admin.sidebar.plugins')} <small class='label label-primary'>#{PluginRoutes.all_plugins.clone.delete_if{|plugin| plugin[:domain].present? && !plugin[:domain].split(",").include?(current_site.the_slug) }.size}</small>", url: cama_admin_plugins_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.plugins")}' data-position='right'"}) if can? :manage, :plugins
+    admin_menu_add_menu("plugins", {icon: "wallet-loaded", title: "#{t('camaleon_cms.admin.sidebar.plugins')}", url: cama_admin_plugins_path, datas: "data-intro='#{t("camaleon_cms.admin.intro.plugins")}' data-position='right'"}) if can? :manage, :plugins
 
     if can? :manage, :users
       items = []
       items << {icon: "list", title: t('camaleon_cms.admin.users.all_users'), url: cama_admin_users_path}
       items << {icon: "plus", title: t('camaleon_cms.admin.users.add_user'), url: new_cama_admin_user_path}
       items << {icon: "group", title: t('camaleon_cms.admin.users.user_roles'), url: cama_admin_user_roles_path}
-      admin_menu_add_menu("users", {icon: "users", title: t('camaleon_cms.admin.sidebar.users'), url: "", items: items, datas: "data-intro='#{t("camaleon_cms.admin.intro.users")}' data-position='right' data-wait='500'"})
+      admin_menu_add_menu("users", {icon: "cv-2", title: t('camaleon_cms.admin.sidebar.users'), url: "", items: items, datas: "data-intro='#{t("camaleon_cms.admin.intro.users")}' data-position='right' data-wait='500'"})
     end
 
     items = []
@@ -52,7 +52,7 @@ module CamaleonCms::Admin::MenusHelper
     end
 
     items << {icon: "windows", title: t('camaleon_cms.admin.settings.theme_setting', default: 'Theme Settings'), url: cama_admin_settings_theme_path} if can? :manage, :theme_settings
-    admin_menu_add_menu("settings", {icon: "cogs", title: t('camaleon_cms.admin.sidebar.settings'), url: "", items: items, datas: "data-intro='#{t("camaleon_cms.admin.intro.settings")}' data-position='right' data-wait='500'"}) if items.present?
+    admin_menu_add_menu("settings", {icon: "robot-2", title: t('camaleon_cms.admin.sidebar.settings'), url: "", items: items, datas: "data-intro='#{t("camaleon_cms.admin.intro.settings")}' data-position='right' data-wait='500'"}) if items.present?
 
   end
 
@@ -108,16 +108,30 @@ module CamaleonCms::Admin::MenusHelper
     @_admin_menus = res
   end
 
+  # draw admin mobile menu as html
+  def admin_mobile_menu_draw
+    res= []
+    @_tmp_menu_parents = []
+    menus = _get_url_current
+    menus.each do |menu|
+      res << "<li data-key='#{menu[:key]}' class='#{"has-sub-menu" if menu.has_key?(:items)} #{"current" if is_active_menu(menu[:key])}' #{menu[:datas]}>
+        <a href='#{menu[:url]}'><div class='icon-w'><div class='os-icon os-icon-#{menu[:icon]}'></div></div><span>#{menu[:title]}</span></a>
+        #{_admin_mobile_menu_draw(menu[:items]) if menu.has_key?(:items)}
+        </li>"
+    end
+    res.join
+  end
+  
   # draw admin menu as html
   def admin_menu_draw
     res= []
     @_tmp_menu_parents = []
     menus = _get_url_current
     menus.each do |menu|
-      res << "<li data-key='#{menu[:key]}' class='#{"treeview" if menu.has_key?(:items)} #{'active' if is_active_menu(menu[:key])}' #{menu[:datas]}>
-        <a href='#{menu[:url]}'><i class='fa fa-#{menu[:icon]}'></i> <span class=''>#{menu[:title]}</span> #{'<i class="fa fa-angle-left pull-right"></i>' if menu.has_key?(:items) }</a>
-        #{_admin_menu_draw(menu[:items]) if menu.has_key?(:items)}
-      </li>"
+      res << "<li data-key='#{menu[:key]}' #{!menu.has_key?(:items) ? "data-toggle='tooltip' data-placement='right' title='" + menu[:title] + "'" : ""} class='#{"has-sub-menu" if menu.has_key?(:items)} #{"current" if is_active_menu(menu[:key])}' #{menu[:datas]}>
+        <a href='#{menu[:url]}'><div class='icon-w'><i class='os-icon os-icon-#{menu[:icon]}'></i></div></a>
+        #{_admin_menu_draw(menu[:items], menu[:title], menu[:icon]) if menu.has_key?(:items)}
+        </li>"
     end
     res.join
   end
@@ -166,16 +180,27 @@ module CamaleonCms::Admin::MenusHelper
     {menus: menus, bool: bool}
   end
 
-  def _admin_menu_draw(items)
+  def _admin_mobile_menu_draw(items)
     res = []
-    res  << "<ul class='treeview-menu'>"
+    res  << "<ul class='sub-menu'>"
     items.each do |item|
-      res  << "<li class='#{"xn-openable" if item.has_key?(:items)} #{'active' if is_active_menu(item[:key])}' #{item[:datas]}>
-                <a href='#{item[:url]}'><i class='fa fa-#{item[:icon]}'></i> #{item[:title]} #{'<i class="fa fa-angle-left pull-right"></i>' if item.has_key?(:items) }</a>
-                #{_admin_menu_draw(item[:items]) if item.has_key?(:items)}
+      res  << "<li class='#{'active' if is_active_menu(item[:key])}' #{item[:datas]}>
+                <a href='#{item.has_key?(:items) ? item[:items][0][:url] : item[:url]}'>#{item[:title]}</a>
               </li>"
     end
     res  << "</ul>"
+    res.join
+  end
+  
+  def _admin_menu_draw(items, title, icon)
+    res = []
+    res  << "<div class='sub-menu-w'><div class='sub-menu-title'>#{title}</div><div class='sub-menu-icon'><i class='os-icon os-icon-#{icon}'></i></div><div class='sub-menu-i'><ul class='sub-menu'>"
+    items.each do |item|
+      res  << "<li class='#{'active' if is_active_menu(item[:key])}' #{item[:datas]}>
+                <a href='#{item[:url]}'>#{item[:title]}</a>
+              </li>"
+    end
+    res  << "</ul></div></div>"
     res.join
   end
 

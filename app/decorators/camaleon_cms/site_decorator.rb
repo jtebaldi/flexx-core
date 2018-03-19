@@ -12,7 +12,7 @@ class CamaleonCms::SiteDecorator < CamaleonCms::TermTaxonomyDecorator
   end
 
   def the_icon
-    object.get_option("icon") || h.asset_url('camaleon_cms/favicon.ico')
+    object.get_option("icon") || h.asset_url('rynger_cms/favicon.ico')
   end
 
   # return all contents from this site registered for post_type = slug (filter visibility, hidden, expired, ...)

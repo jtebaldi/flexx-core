@@ -1,4 +1,5 @@
 <% _admin_menu_draw = admin_menu_draw %>
+<% _admin_mobile_menu_draw = admin_mobile_menu_draw %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,10 +18,8 @@
         var tinymce_global_settings = {language_url: "<%= asset_path("camaleon_cms/admin/tinymce/langs/#{current_locale}.js") %>", custom_css: [], custom_toolbar: [], post_render: [], init: [], setups: [], settings: []};
         var I18n_data = <%= I18n.backend.send(:translations)[current_locale.to_sym][:camaleon_cms][:admin][:js].to_json.html_safe rescue "{}" %>
     </script>
-    <%= javascript_include_tag "camaleon_cms/admin/admin-manifest" %>
 
-    <%= javascript_include_tag "camaleon_cms/admin/jquery_validate/#{current_locale}.js" if current_locale != 'en' %>
-    <%= javascript_include_tag "camaleon_cms/admin/momentjs/#{current_locale}.js" if current_locale != 'en' %>
+    <%= javascript_include_tag "rynger_cms/admin/admin-manifest" %>
 
     <%= raw the_head({}, false) %>
     <%= yield :head if content_for? :head %>
@@ -33,22 +32,35 @@
 <body class="hold-transition skin-black-light sidebar-mini" data-intro="<%= current_site.get_option("save_intro") %>">
     <%= yield :before_content if content_for? :before_content %>
     <%= raw cama_content_before_draw %>
-    <div class="wrapper">
+    <div class="all-wrapper menu-side">
+      <div class="layout-w">
 
-        <%= render partial: "layouts/camaleon_cms/admin/header" %>
-        <%= render partial: "layouts/camaleon_cms/admin/sidebar", locals: {_admin_menu_draw: _admin_menu_draw} %>
+        <%= render partial: "layouts/camaleon_cms/admin/mobile_menu", locals: {_admin_mobile_menu_draw: _admin_mobile_menu_draw} %>
 
-        <div class="content-wrapper">
+        <%= render partial: "layouts/camaleon_cms/admin/menu_side", locals: {_admin_menu_draw: _admin_menu_draw} %>
+
+
+        <div class="content-w">
             <!-- Main content -->
             <section class="content" id="admin_content">
+                <%= render partial: "layouts/camaleon_cms/admin/top_menu_secondary" %>
                 <ol class="breadcrumb"><%= render_breadcrumbs :tag => :li, :separator => "" %></ol>
-                <%= render "camaleon_cms/flash_messages" %>
-                <%= yield %>
+
+                <div class="content-i">
+                  <div class="content-box">
+                    <%= render "camaleon_cms/flash_messages" %>
+
+                    <%= yield %>
+                  </div>
+
+                </div>
+
             </section>
             <!-- /.content -->
         </div>
 
-        <%= render partial: "layouts/camaleon_cms/admin/footer" %>
+      </div>
+      <div class="display-type"></div>
     </div>
     <%= raw cama_content_after_draw %>
     <%= yield :after_content if content_for? :after_content %>

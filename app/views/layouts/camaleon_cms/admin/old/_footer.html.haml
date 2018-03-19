@@ -1,0 +1,13 @@
+%footer#main-footer.main-footer
+  .row
+    .col-md-12.hidden-xs
+      .pull-left
+        %a#link_see_intro{:href => "#", :onclick => "init_intro(); return false;"}
+          %i.fa.fa-tv
+          = I18n.t('camaleon_cms.see_intro')
+      .pull-right
+        %a.not-active{href: "#", style: "color:#373737;text-transform:uppercase;font-weight:600"}
+          %span{style: "font-size:10px;font-weight:normal;"} Powered by
+          Rynger | DEV
+        // %b Version
+        // = CamaleonCms::VERSION

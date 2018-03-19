@@ -1,0 +1,29 @@
+// Overrides for Light
+
+// Added new class "current" to show active menu item without displaying the submenu
+.menu-side-compact-w ul.main-menu > li.current {
+  & > a {
+    background-color: #0061da;  
+    & .icon-w {
+      color: #fff;
+    }
+  }
+}
+
+// Use desktop side menu instead of mobile side menu from 768-1024px
+@media (max-width: 1024px) and (min-width: 768px) {
+  .menu-mobile {
+    display: none;
+  }
+  .menu-side-compact-w {
+    display: table-cell !important;
+    vertical-align: top;
+  }
+}
+
+// Contain logo image on login page
+.auth-box-w > .logo-w {
+  img {
+    max-width: 100%; 
+  }
+}

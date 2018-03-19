@@ -5,7 +5,7 @@
 
       <h5 class="box-title"><span class="fa fa-cog"></span> <%= t('camaleon_cms.admin.settings.list_custom_fields_group') %> <%= @field_groups.count %></h4>
       <%= link_to raw("<i class='fa fa-plus'></i> #{t('camaleon_cms.admin.settings.add_field_group')}"), {action: :new}, class: "btn btn-primary pull-right cama_ajax_request" %>
-      
+
       <div class="box-body table-responsive">
 
         <table id="table_custom_groups" class="table table-hover table-striped">
@@ -40,7 +40,7 @@
         <%= content_tag("div", raw(t('camaleon_cms.admin.message.data_found_list')), class: "alert alert-warning") if @field_groups.empty? %>
           <%= raw cama_do_pagination(@field_groups) %>
       </div>
-    
+
     </div>
   </div>
 </div>
