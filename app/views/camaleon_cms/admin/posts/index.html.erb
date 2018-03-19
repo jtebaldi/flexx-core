@@ -4,7 +4,9 @@
             <div class="col-md-12">
                 <h4 class="pull-left">
                     <%= t('camaleon_cms.admin.page_title.list_of', post_type: @post_type.the_title) %>
+                    <% if current_user.admin? %>
                     <b>(slug = <%= @post_type.the_slug %>)</b> <%= link_to("<i class='fa fa-eye'></i> #{t("camaleon_cms.common.visit")}".html_safe, @post_type.the_url, class: 'btn btn-xs', target: '_blank') %>
+                    <% end %>
                 </h4>
                 <%= link_to raw("<i class='fa fa-plus'></i> #{t('camaleon_cms.admin.post_type.add')} #{@post_type.the_title}"), {action: :new}, class: "btn btn-primary pull-right cama_ajax_request" if can? :create_post, @post_type %>
             </div>
@@ -27,7 +29,7 @@
         <table class="table table-responsive table-hover table-striped" id="posts-table-list">
             <thead>
             <tr>
-                <th><%= t('camaleon_cms.admin.table.id') %></th>
+                <% if current_user.admin? %><th><%= t('camaleon_cms.admin.table.id') %></th><% end %>
                 <th><%= t('camaleon_cms.admin.table.title') %></th>
                 <%= content_tag :th, t('camaleon_cms.admin.table.owner') if @lists_tab == "draft" %>
                 <th><%= t('camaleon_cms.admin.table.status') %></th>
@@ -47,7 +49,7 @@
             <tbody>
             <% (@post_type.manage_hierarchy? ? cama_hierarchy_post_list(@posts.eager_load(:categories, :post_tags).decorate.to_a) : @posts.eager_load(:categories, :post_tags).decorate).each do |f| title = f.the_hierarchy_title %>
                 <tr data-id="<%= f.id %>" class="<%= "sortable" if can? :update, f %>">
-                    <td><%= f.id %></td>
+                    <% if current_user.admin? %><td><%= f.id %></td><% end %>
                     <td>
                         <% if !f.trash? && (can? :update, f) %>
                             <%= link_to title, {action: :edit, id: f.id}, class: "cama_ajax_request" %>
@@ -69,6 +71,9 @@
                     <td><%= f.the_updated_at %></td>
                     <td style="text-align: right">
                         <% if f.published? %>
+                            <% if current_site.manage_sites? %>
+                                <%= link_to raw('<i class="fa fa-share-square-o"></i>'), {action: :duplicate, post_id: f.id}, class: "btn btn-success btn-xs", title: "Share with other sites" %>
+                            <% end %>
                             <% if f.slug.to_s.translations.present? %>
                                 <div class="btn-group">
                                     <button class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="<%= t('camaleon_cms.admin.button.preview') %>">

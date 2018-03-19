@@ -49,6 +49,7 @@ class CamaleonCms::Admin::PostsController < CamaleonCms::AdminController
     per_page = 9999999 if @post_type.manage_hierarchy?
     @posts = r[:posts].paginate(:page => params[:page], :per_page => r[:per_page])
     render r[:render]
+
   end
 
   def show
@@ -68,6 +69,17 @@ class CamaleonCms::Admin::PostsController < CamaleonCms::AdminController
     post_data = get_post_data(true)
     CamaleonCms::Post.drafts.find(post_data[:draft_id]).destroy rescue nil
     @post = @post_type.posts.new(post_data)
+
+    # if post_data[:publish_all_sites]
+    #   CamaleonCms::PostType.all.where(slug: 'blog').where.not(parent_id: current_site.id).each do |post_type|
+    #   @all_sites.each do |site|
+    #     new_post = @post.dup
+    #     new_post.status = 'draft'
+    #     new_post.post_type = post_type
+    #     new_post.save
+    #   end
+    # end
+
     r = {post: @post, post_type: @post_type}; hooks_run("create_post", r)
     @post = r[:post]
     if @post.save
@@ -157,6 +169,18 @@ class CamaleonCms::Admin::PostsController < CamaleonCms::AdminController
       end
     end
     redirect_to (:back || url_for(action: :index, s: params[:s]))
+  end
+
+  def duplicate
+    @post = @post_type.posts.find(params[:post_id])
+    CamaleonCms::PostType.all.where(slug: 'blog').where.not(parent_id: current_site.id).each do |post_type|
+      new_post = @post.dup
+      new_post.status = 'pending'
+      new_post.post_type = post_type
+      new_post.save
+    end
+    flash[:notice] = "Post shared with all sites"
+    redirect_to action: :index, s: params[:s]
   end
 
   # ajax options
