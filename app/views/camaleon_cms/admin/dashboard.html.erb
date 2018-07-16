@@ -1,3 +1,4 @@
+<% pageid = current_site.post_types.find_by(slug: "page").id %> 
 <div class="page-content-wrap">
   <div class="row">
     <div class="col-md-12">
@@ -7,7 +8,37 @@
           <h3 class="panel-title"><%= t('camaleon_cms.admin.sidebar.dashboard') %></h3>
         </div>
         <div class="panel-body" style="min-height: 350px">
-            <h1>Your custom dashboard coming soon!</h1>
+          <h3>Quick links</h3>
+          <div class="row">
+
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <a href="/admin/settings/theme" class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-gear"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Site</span>
+                  <span class="info-box-number">Settings</span>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <a href="/admin/post_type/<%= pageid %>/posts" class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Your</span>
+                  <span class="info-box-number">Pages</span>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+              <a href="/admin/plugins/cama_contact_form/admin_forms" class="info-box">
+                <span class="info-box-icon bg-blue"><i class="fa fa-users"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Form</span>
+                  <span class="info-box-number">Contacts</span>
+                </div>
+              </a>
+            </div>
+          </div>
 
             <% r = {content: ""}; hooks_run("on_notification", r); %>
             <div id="dashboard_notifications">
