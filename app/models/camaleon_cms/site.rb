@@ -24,6 +24,8 @@ class CamaleonCms::Site < CamaleonCms::TermTaxonomy
   after_destroy :reload_routes
   validates_uniqueness_of :slug, scope: :taxonomy
 
+  acts_as_tagger
+
   # all user roles for this site
   def user_roles
     if PluginRoutes.system_info["users_share_sites"]
