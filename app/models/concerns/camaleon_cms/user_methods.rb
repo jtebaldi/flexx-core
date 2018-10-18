@@ -15,7 +15,7 @@ module CamaleonCms::UserMethods extend ActiveSupport::Concern
     # relations
     has_many :metas, ->{ where(object_class: 'User')}, :class_name => "CamaleonCms::Meta", foreign_key: :objectid, dependent: :destroy
     has_many :all_posts, class_name: "CamaleonCms::Post", foreign_key: :user_id
-    has_many :all_comments, class_name: "CamaleonCms::PostComment"
+    has_many :all_comments, class_name: "CamaleonCms::PostComment", foreign_key: :user_id
 
     #scopes
     scope :admin_scope, -> { where(:role => 'admin') }
@@ -37,7 +37,7 @@ module CamaleonCms::UserMethods extend ActiveSupport::Concern
   end
 
   def fullname
-    "#{self.first_name} #{self.last_name}".titleize
+    "#{self.first_name} #{self.last_name}"
   end
 
   def admin?
