@@ -1,0 +1,14 @@
+<div id="tab-twilio_settings" class="<%= 'active' if 'twilio' == params[:tab] %> tab-pane ">
+  <div class="form-group">
+      <label for="">Account Sid</label><br>
+      <%= text_field :options, :twilio_account_sid, :class => "form-control", :value => @site.get_option('twilio_account_sid', ENV["TWILIO_ACCOUNT_SID"]) %>
+  </div>
+  <div class="form-group">
+      <label for="">Auth Token</label><br>
+      <%= text_field :options, :twilio_auth_token, :class => "form-control", :value => @site.get_option('twilio_auth_token', ENV["TWILIO_AUTH_TOKEN"]) %>
+  </div>
+  <div class="form-group">
+      <label for="">Campaigns Number</label><br>
+      <%= text_field :options, :twilio_campaigns_number, :class => "form-control", :value => @site.get_option('twilio_campaigns_number', '') %>
+  </div>
+</div>
