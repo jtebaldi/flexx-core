@@ -1,12 +1,6 @@
-$:.push File.expand_path("../lib", __FILE__)
-
-# Maintain your gem's version:
-require "camaleon_cms/version"
-
-# Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "camaleon_cms"
-  s.version     = CamaleonCms::VERSION
+  s.version     = "2.4.3.8"
   s.authors     = ["Owen Peredo Diaz"]
   s.email       = ["owenperedo@gmail.com"]
   s.homepage    = "http://camaleon.tuzitio.com"
